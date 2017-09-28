@@ -1,6 +1,6 @@
 module.exports = (navigationViewAnimation,boolAnimation) =>{
   navigationViewAnimation = new tabris.NavigationView({
-   left: 0, top: 0, right: 0, bottom: 0, toolbarColor:"#84BD3A", titleTextColor:"#fff"
+   left: 0, top: 0, right: 0, bottom: 0, toolbarColor:"#1562AD", titleTextColor:"#fff"
     }).appendTo(tabris.ui.contentView);
   if(boolAnimation === true){
       navigationViewAnimation.set({
