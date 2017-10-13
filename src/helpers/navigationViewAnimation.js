@@ -4,11 +4,11 @@ module.exports = (navigationViewAnimation,boolAnimation) =>{
     }).appendTo(tabris.ui.contentView);
   if(boolAnimation === true){
       navigationViewAnimation.set({
-        transform:{translationY:20},
-        animated:false
+        opacity:0,
+        transform:{scale:0},
        });
       navigationViewAnimation.animate({
-         transform: {scale:0},
+         transform: {scale:1},
          opacity:1
        }, {
          delay: 0,
@@ -17,7 +17,7 @@ module.exports = (navigationViewAnimation,boolAnimation) =>{
          reverse:false,
          easing: "linear"
        } 
-    ).then(function(){this.set({animated:true});});
+    ).then(function(){});
    }
  
 return navigationViewAnimation;

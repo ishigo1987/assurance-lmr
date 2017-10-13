@@ -3,12 +3,11 @@ let navigationView = new tabris.NavigationView({left: 0, top: 0, right: 0, botto
 require('./modules/tabrisUi.js')(`dark`, `#104e8a`, themeColor);
 let storeUserInfos = localStorage.getItem("storeUserInfos");
 if(storeUserInfos === null){
-   // connexion.js
-   let connexionView = require('./views/connexion.js');
-       connexionView.create();
+  const lmrPresentationView = require("./views/lmrPresentation.js");
+        lmrPresentationView.create();
  }else{
      // home.js
-     let homePage = require("./views/home.js");
-         homePage.create();
+    let homePage = require("./views/home.js");
+        homePage.create();
  }
 

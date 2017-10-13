@@ -8,5 +8,5 @@ module.exports = (themeString, themeBgHex, bgHex) =>{
   tabris.ui.set({
       background: bgHex,
    });
-tabris.ui.contentView.background = '#fff';
+tabris.ui.contentView.background = '#1562AD';
  };
