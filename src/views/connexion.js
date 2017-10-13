@@ -22,7 +22,7 @@ exports.create = () =>{
       const regexMail =  /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
       let isEmailOrLogin;
       if(loginValue === "" || passwordValue === ""){
-         window.plugins.toast.showShortBottom("Veuillez remplir tout les champs");  
+         require('../custom_widgets/snackbar.js')(connexionView,40,"Veuillez remplir tout les champs");  
        }else{
          if(!regexMail.test(loginValue)){
             isEmailOrLogin = "login";
