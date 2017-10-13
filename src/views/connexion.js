@@ -1,9 +1,10 @@
 exports.create = () =>{
   "use strict";
   const themeColor = "#1562AD";
+  require('../modules/tabrisUi.js')(`dark`, '#104e8a' , themeColor);
   const font16px = "16px roboto, noto";
   let createnavigationView;
-  let executeNavigationView = require("../helpers/navigationViewAnimation.js")(createnavigationView);
+  let executeNavigationView = require("../helpers/navigationViewAnimation.js")(createnavigationView,true);
   let connexionView = new tabris.Page({
      title: `Se connecter`,
      background:`#fafafa`

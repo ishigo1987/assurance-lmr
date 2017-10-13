@@ -5,14 +5,14 @@ module.exports = (navigationViewAnimation,boolAnimation) =>{
   if(boolAnimation === true){
       navigationViewAnimation.set({
         opacity:0,
-        transform:{scale:0},
+        transform:{scaleX:0,scaleY:0},
        });
       navigationViewAnimation.animate({
-         transform: {scale:1},
+         transform: {scaleX:1,scaleY:1},
          opacity:1
        }, {
          delay: 0,
-         duration:100,
+         duration:200,
          repeat:0,
          reverse:false,
          easing: "linear"
