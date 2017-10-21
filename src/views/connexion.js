@@ -1,49 +1,82 @@
 exports.create = () =>{
   "use strict";
+  const {Page,ScrollView,ImageView,TextInput,Button,TextView} = require('tabris');
+  let labelAnim = require('../helpers/animateLabel.js');
+  let messageInfo = require('../custom_widgets/snackbar.js');
   const themeColor = "#1562AD";
   require('../modules/tabrisUi.js')(`dark`, '#104e8a' , themeColor);
-  const font16px = "16px roboto, noto";
+  const font14px = "14px roboto, noto";
   let createnavigationView;
-  let executeNavigationView = require("../helpers/navigationViewAnimation.js")(createnavigationView,true);
-  let connexionView = new tabris.Page({
-     title: `Se connecter`,
-     background:`#fafafa`
-   }).appendTo(executeNavigationView);
+  const executeNavigationView = require("../helpers/navigationViewAnimation.js")(createnavigationView,true);
+  const connexionView = new Page({title: `Se connecter`,background:`#fafafa`}).appendTo(executeNavigationView);
   
-  let scrollView = new tabris.ScrollView({left:0,right:0,top:0,background: "#fafafa",bottom:30}).appendTo(connexionView);
-  let imageView = new tabris.ImageView({layoutData:{centerX: 0,width: 250,height: 150,top:20},image:"src/img/logo.png",scaleMode: "fit"}).appendTo(scrollView);
-  let login = new tabris.TextInput({layoutData:{top:["prev()", 15],left:"10%",right:"10%"},font: font16px,message: "Entrez votre identifiant ou adresse mail",borderColor:themeColor}).appendTo(scrollView);
-  let password = new tabris.TextInput({layoutData:{top:["prev()", 15],left:"10%",right:"10%"},font: font16px,message: "Entrez votre mot de passe",type:"password",borderColor:themeColor}).appendTo(scrollView);
-  let button = new tabris.Button({layoutData:{ top:["prev()", 15],left:"10%",right:"10%"},font: font16px,textColor:"#fff",text:"Connexion",background: themeColor,elevation:0
+  const scrollView = new ScrollView({left:0,right:0,top:0,background: "#fafafa",bottom:0}).appendTo(connexionView);
+  const imageView = new ImageView({layoutData:{centerX: 0,width: 250,height: 150,top:20},image:"src/img/logo.png",scaleMode: "fit", id:"logo"}).appendTo(scrollView);
+  const labelIdentifiant = new TextView({top:["prev()", 25],left:"10%",text:"IDENTIFIANT",textColor:"#212121",font:"16px roboto, noto"}).appendTo(scrollView);
+  const login = new TextInput({layoutData:{top:["prev()", 0],left:"10%",right:"10%"},font: font14px,message: "Votre adresse mail",keyboard:"email",borderColor:"#e0e0e0",id:'login'}).appendTo(scrollView);
+  const labelPassword = new TextView({top:["prev()", 20],left:"10%",text:"MOT DE PASSE",textColor:"#212121",font:"16px roboto, noto"}).appendTo(scrollView);
+  const password = new TextInput({layoutData:{top:["prev()", 0],left:"10%",right:"10%"},font: font14px,message: "Votre mot de passe",type:"password",borderColor:"#e0e0e0",id:'password'}).appendTo(scrollView);
+  const button = new Button({layoutData:{ top:["prev()", 15],left:"10%",right:"10%"},font: font14px,textColor:"#fff",text:"Connexion",background: themeColor,elevation:0
   }).on("select", () =>{
       // On teste que les champs ne sont pas vides si c'est le cas on lance la verification du couple login mot de passe
       const loginValue = login.text;
       const passwordValue = password.text;
       const regexMail =  /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-      let isEmailOrLogin;
       if(loginValue === "" || passwordValue === ""){
-         require('../custom_widgets/snackbar.js')(connexionView,40,"Veuillez remplir tout les champs");  
-       }else{
-         if(!regexMail.test(loginValue)){
-            isEmailOrLogin = "login";
-          }else{
-              isEmailOrLogin = "email";
-          }
-        let objectConnection = { identifiant:loginValue,password:passwordValue,emailOrLogin:isEmailOrLogin};
-        let connectionAjax = require("../modules/ajax.js")(objectConnection,"verification login password","connexionView",executeNavigationView);
+         messageInfo(connexionView,40,"Veuillez remplir tout les champs");  
+      }else if(!regexMail.test(loginValue)){
+         messageInfo(connexionView,40,"Veuillez entrer une adresse mail valide");
+      }else{
+         let objectConnection = {identifiant:loginValue,password:passwordValue,requestName:'Connection'};
+             objectConnection = JSON.stringify(objectConnection);
+         const connectionAjax = require("../modules/ajax.js")(objectConnection,"https://www.afrikhealth.com/apiAssuranceLmr/apiConnection.php");
+               connectionAjax.then((response)=>{
+                 if(response.Message === 'Connexion effectuée'){
+                  let dataUserToStore = {Id:response.Id,Identifiant:response.Identifiant,Adresse_mail:response.Adresse_mail};
+                      dataUserToStore = JSON.stringify(dataUserToStore);
+                  localStorage.setItem('storeUserInfos', dataUserToStore);
+                  executeNavigationView.dispose();
+                  const homeView = require('./home.js');
+                        homeView.create();
+                 }else if(response.Message === 'Votre couple login, mot de passe ne correspond pas'){
+                  messageInfo(connexionView,80,response.Message);
+                 }
+               }).catch(()=>{
+                messageInfo(connexionView,80,"Impossible de traiter la demande veuillez réssayer");
+               });
        }
 }).appendTo(scrollView);
-let inscription = new tabris.Button({layoutData:{top:["prev()", 15],left:"10%",right:"10%"},font: font16px,text:"Créer un compte",textColor:"#212121",
+
+const input = connexionView.find('TextInput');
+      input.on({
+        focus: function(){
+         const id = this.id;
+         if(id === 'login'){
+          labelAnim(labelIdentifiant,'focus');
+         }else if(id === 'password'){
+          labelAnim(labelPassword,'focus');
+         }
+        },
+        blur: function(){
+         const id = this.id;
+         if(id === 'login'){
+          labelAnim(labelIdentifiant,'blur');
+         }else if(id === 'password'){
+          labelAnim(labelPassword,'blur');
+         }
+        }
+      });
+const inscription = new Button({layoutData:{top:["prev()", 15],left:"10%",right:"10%"},font: font14px,text:"Créer un compte",textColor:"#212121",
    background: "#eeeeee",
    elevation:0
 }).on("select", () =>{  
-   let inscriptionPage = require("./inscription.js");
+   const inscriptionPage = require("./inscription.js");
    inscriptionPage.create().appendTo(executeNavigationView);
 }).appendTo(scrollView);     
-let forgetPassword = new tabris.TextView({layoutData:{top:["prev()", 15],centerX:0},font: font16px,text:"Mot de passe oublié?",textColor:"#263238",
+const forgetPassword = new TextView({layoutData:{top:["prev()", 15],centerX:0},font: font14px,text:"Mot de passe oublié?",textColor:"#263238",
 }).on("tap", () =>{
-   let enterEmailAdress = require("./enterEmailAdress.js");
-   enterEmailAdress.create().appendTo(executeNavigationView);
+   const forgottenPassword = require("./forgottenPassword.js");
+         forgottenPassword.create().appendTo(executeNavigationView);
 }).appendTo(scrollView);
 
 return executeNavigationView;

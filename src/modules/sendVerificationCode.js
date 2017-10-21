@@ -1,0 +1,29 @@
+module.exports = (emailTosendCode) =>{
+  "use strict";
+  return new Promise((resolve,reject)=>{
+    let pDialog = require("../plugins/pDialog.js");
+    let generateNumber = new Uint16Array(1);
+    window.crypto.getRandomValues(generateNumber);
+    let codeVerification = String(generateNumber[0]);
+    if(codeVerification.length === 4){codeVerification = `5${codeVerification}`;}
+    let jsonToSend = {email: emailTosendCode,code: codeVerification, requestName:'Verification Code'};
+        jsonToSend = JSON.stringify(jsonToSend);
+    localStorage.setItem("verificationCode", codeVerification);
+    let xhr = new XMLHttpRequest();
+    xhr.addEventListener("loadstart",()=>{
+      pDialog("Envoi d'un code de vérification en cours...",false,true);
+    });
+    xhr.addEventListener("load", () =>{
+     let xhrResponse = JSON.parse(xhr.responseText);
+     pDialog("",true,false);
+     resolve(xhrResponse);
+    });
+    xhr.addEventListener("error", () =>{
+      pDialog("",true,false);
+      reject("Pas de connexion internet");
+    });
+    xhr.responseType = "text";
+    xhr.open('POST','https://www.afrikhealth.com/apiAssuranceLmr/apiConnection.php', true);
+    xhr.send(jsonToSend);
+  });
+};
