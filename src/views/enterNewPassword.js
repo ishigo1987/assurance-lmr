@@ -1,8 +1,9 @@
-// exports.create = () =>{
+exports.create = () =>{
    const themeColor = "#1562AD";
    const {Page,TextView,TextInput,Button} =  require('tabris');
    const labelAnim = require('../helpers/animateLabel.js');
    const messageInfo = require('../custom_widgets/snackbar.js');
+   const pDialog = require("../plugins/pDialog.js");
    const layoutDataHelper = {top:["prev()", 30],left:"10%",right:"10%"};
    let createnavigationViewResetPassword;
    const font14px = "14px roboto, noto";

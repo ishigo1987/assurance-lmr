@@ -3,6 +3,7 @@ exports.create = () =>{
   const {Page,ScrollView,ImageView,TextInput,Button,TextView} = require('tabris');
   let labelAnim = require('../helpers/animateLabel.js');
   let messageInfo = require('../custom_widgets/snackbar.js');
+  const pDialog = require("../plugins/pDialog.js");
   const themeColor = "#1562AD";
   require('../modules/tabrisUi.js')(`dark`, '#104e8a' , themeColor);
   const font14px = "14px roboto, noto";
@@ -29,8 +30,10 @@ exports.create = () =>{
       }else{
          let objectConnection = {identifiant:loginValue,password:passwordValue,requestName:'Connection'};
              objectConnection = JSON.stringify(objectConnection);
+         pDialog("Finalisation de l'inscription.",false,true);
          const connectionAjax = require("../modules/ajax.js")(objectConnection,"https://www.afrikhealth.com/apiAssuranceLmr/apiConnection.php");
                connectionAjax.then((response)=>{
+                pDialog("",true,false);
                  if(response.Message === 'Connexion effectuée'){
                   let dataUserToStore = {Id:response.Id,Identifiant:response.Identifiant,Adresse_mail:response.Adresse_mail};
                       dataUserToStore = JSON.stringify(dataUserToStore);
@@ -42,6 +45,7 @@ exports.create = () =>{
                   messageInfo(connexionView,80,response.Message);
                  }
                }).catch(()=>{
+                pDialog("",true,false);
                 messageInfo(connexionView,80,"Impossible de traiter la demande veuillez réssayer");
                });
        }
