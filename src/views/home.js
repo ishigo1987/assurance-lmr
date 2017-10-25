@@ -12,34 +12,35 @@ exports.create = () => {
         handleActionCategorie.on("select",()=>{
           console.log("you");
         });
+    let searchAction = new SearchAction({message: 'Rechercher une assurance',image: {src:'src/icons/search.png',scale:1.5}})
+    .on({
+     select:()=>{
+      handleActionCategorie.visible = false;
+     },
+     accept:()=>{
+      handleActionCategorie.visible = true;
+     }
+    }).appendTo(executeNavigationView);
     let drawer = ui.drawer;
     drawer.enabled = true;
     drawer.background = "#fff";
     // const PROPOSALS = ['RESPONSABILITE CIVILE CHEF D’ENTREPRISE', 'ASSURANCE TOUS RISQUES INFORMATIQUE', 'ASSURANCE MALADIE', 'ASSURANCE HABITATION', 'ASSURANCE  INCENDIE  ET  PERTE  D’EXPLOITATION', 'ASSURANCE  INDIVIDUELLE  ACCIDENT','TOUS  RISQUES  CHANTIER',' ASSURANCE  VIE  ET  CAPITALISATION ','ASSURANCE  BRIS  DE  MACHINE','VOL EN COFFRE FORT','TRANSPORT DES FONDS','VOYAGE OU MALADIE INTERNATIONALE','ASSURANCE AUTOMOBILE','ASSURANCE PREVOYANCE RETRAITE','CONTRAT INDEMNITES DE FIN DE CARRIERE (IFC)','VISA ETUDE PLUS','ASSURANCE ASSISTANCE FRAIS FUNERAILLES','BANCASSURANCE'];
-    let homeView = new Page({title: `LMR ASSURANCES`,background: `#fafafa`,
+    let homeView = new Page({title: `M. ASSURANCES`,background: `#fafafa`,
     }).on({
         appear: () => {
+         searchAction.visible = true;
          handleActionCategorie.visible = true;
          drawer.enabled = true;
         },
         disappear: () => {
+         searchAction.visible = false;
          handleActionCategorie.visible = false;
          drawer.enabled = false;
         }
     }).appendTo(executeNavigationView);
-    let searchAction = new SearchAction({message: 'Rechercher une assurance',image: {src:'src/icons/search.png',scale:1.5}})
-    .on({
-       select:()=>{
-        handleActionCategorie.visible = false;
-       },
-       input: ()=>{
-
-       },
-       accept:()=>{
-        handleActionCategorie.visible = true;
-       }
-    }).appendTo(executeNavigationView);
-    const scrollView = new ScrollView({ left: 0,right: 0,top: 0,bottom: 0}).appendTo(homeView);
+    const scrollView = new ScrollView({ left: 0,right: 0,top: 40,bottom: 0}).appendTo(homeView);
+    const typeOfAssuranceComposite = new Composite({top:0,left:0,right:0,height:40,background:"#2c71b5"}).appendTo(homeView);
+    const textTypeOfAssurance = new TextView({centerX:0,centerY:0,maxLines:1,textColor:"#0e4479",text:"TOUTES LES ASSURANCES",font:"bold 16px roboto, noto"}).appendTo(typeOfAssuranceComposite);
     require('../modules/cardHome.js')(scrollView);
 
     // Creation du composite du drawer
@@ -49,15 +50,15 @@ exports.create = () => {
     // Creation de la collectionView du drawer 
     const itemConfig = [
         {
-            title: "Créer mon assurance",
+            title: "Demander un devis",
             image: "src/icons/new-insurance.png"
      },
         {
-            title: "Poser une question a un agent",
+            title: "Poser une question à un agent",
             image: "src/icons/insurance-agent.png"
      },
         {
-            title: "Mes paramétres",
+            title: "Mes paramètres",
             image: "src/icons/settings.png"
      },
         {
@@ -82,6 +83,7 @@ exports.create = () => {
             bottom: 0,
             top: 100,
             background: "#fff",
+            highlightOnTouch:true
          });
             // Bordures
           new Composite({
@@ -105,22 +107,14 @@ exports.create = () => {
     }) => {
         let itemIndex = itemConfig[index];
         drawer.close();
-        if (itemIndex.title === "Déconnexion") {
-            executeNavigationView.dispose();
-            localStorage.removeItem("storeUserInfos");
-            let connexionPage = require("./connexion.js");
-                connexionPage.create();
-        } else if (itemIndex.title === "Offres d'emploi") {
-            // let jobsView = require("./jobs.js")(executeNavigationView);
-            // jobsView.appendTo(executeNavigationView);
-        } else if (itemIndex.title === "Planning de cours") {
-            // require("../modules/downloadPlanning.js")();
-        } else if (itemIndex.title === "Examens et concours") {
-            // let examAndConcoursView = require("./examsAndConcours.js")(executeNavigationView);
-            // examAndConcoursView.appendTo(executeNavigationView);
-        } else if (itemIndex.title === "A propos de nous") {
-            // let aboutUsView = require("./aboutUsView.js")();
-            // aboutUsView.appendTo(executeNavigationView);
+        if(itemIndex.title === "Demander un devis"){
+         const createDevisPage = require("./createDevis.js");
+               createDevisPage.create().appendTo(executeNavigationView);
+        }else if(itemIndex.title === "Déconnexion") {
+         executeNavigationView.dispose();
+         localStorage.removeItem("storeUserInfos");
+         let connexionPage = require("./connexion.js");
+             connexionPage.create();
         }
     }).appendTo(drawer);
 

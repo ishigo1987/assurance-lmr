@@ -21,14 +21,14 @@ exports.create = ()=>{
   const tab1 = new Tab({title:'tab1'}).appendTo(tabFolder);
   const tab2 = new Tab({title:'tab2'}).appendTo(tabFolder);
   const tab3 = new Tab({title:'tab3'}).appendTo(tabFolder);
-  createAndPopulateTab(tab1,'src/img/logomsrassurances.png',"Les origines des mutuelles reunies","Il y a 21 ans naissait <strong>Les mutuelles reunies</strong>. L’idée maitresse qui habitait le promoteur, M. Jean-Bosco TCHACHUANG, cadre supérieur de la défunte AMACAM, entouré de certains de ses anciens collaborateurs, était de promouvoir l’entraide et l’esprit de solidarité : fondement de la prévention des risques, crédo de l’activité d’assurance.");
-  createAndPopulateTab(tab2,'src/img/lmrvaleurs.png',"Les valeurs des mutuelles reunies","Nous développons notre savoir-faire dans le respect des valeurs mutualistes qui nous ont toujours guidé et également permis de nous adapter à l’environnement dynamique dans lequel nous évoluons.");
-  createAndPopulateTab(tab3,'src/img/notreequipe.png',"Notre equipe a votre disposition","Chez les mutuelles reunies vous disposez d'une equipe d'experts qui saura vous guider et vous proposer le service le plus adapté pour l'assurance que vous voulez prendre");
+  createAndPopulateTab(tab1,'src/img/logomsrassurances.png',"<br/><br/><big>M. Assurances</big>","");
+  createAndPopulateTab(tab2,'src/img/lmrvaleurs.png',"Les valeurs de M. Assurances","Nous développons notre savoir-faire dans le respect des valeurs mutualistes qui nous guide et nous permet de nous adapter à l’environnement dynamique dans lequel nous évoluons. L’information et la sensibilisation des assurés et non assurés sont notre raison d’être.");
+  createAndPopulateTab(tab3,'src/img/notreequipe.png',"Notre équipe à disposition","Chez M. Assurances, vous disposez d’une équipe de professionnels avec une expérience de plus de 21 ans dans le domaine d’assurances. Nous saurons vous guider et vous proposer des solutions et services adaptés à vos besoins.");
   // function de creation et de remplissage des elements des tab du tabfolder
   function createAndPopulateTab(whichTab,imageInsideEachTab,titleInsideEachTab,textInsideEachTab){
     const scrollViewInsideTabFolder = new ScrollView({left: 0,right: 0,top: 0,bottom:50}).appendTo(whichTab);
-    const imgTab = new ImageView({centerX:0,scaleMode:'fit',width:160,height:160,top:"7%",image:imageInsideEachTab}).appendTo(scrollViewInsideTabFolder);
-    const titleInsideTab = new TextView({left:25,right:25,top:["prev()", 30],text:titleInsideEachTab,font:"24px roboto,noto",textColor:"#fff"}).appendTo(scrollViewInsideTabFolder);
+    const imgTab = new ImageView({centerX:0,scaleMode:'fit',width:180,height:180,top:"7%",image:imageInsideEachTab}).appendTo(scrollViewInsideTabFolder);
+    const titleInsideTab = new TextView({left:25,right:25,top:["prev()", 30],text:titleInsideEachTab,font:"24px roboto,noto",textColor:"#fff",markupEnabled:true}).appendTo(scrollViewInsideTabFolder);
     const textTab = new TextView({left:25,right:25,top:["prev()", 15],text:textInsideEachTab,font:font16px,textColor:"#fff",markupEnabled:true}).appendTo(scrollViewInsideTabFolder);
   }
   // gestion du slider

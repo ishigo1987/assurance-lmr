@@ -1,4 +1,4 @@
-module.exports = (emailTosendCode) =>{
+module.exports = (phoneToSendCode) =>{
   "use strict";
   return new Promise((resolve,reject)=>{
     let pDialog = require("../plugins/pDialog.js");
@@ -6,7 +6,7 @@ module.exports = (emailTosendCode) =>{
     window.crypto.getRandomValues(generateNumber);
     let codeVerification = String(generateNumber[0]);
     if(codeVerification.length === 4){codeVerification = `5${codeVerification}`;}
-    let jsonToSend = {email: emailTosendCode,code: codeVerification, requestName:'Verification Code'};
+    let jsonToSend = {telephone: phoneToSendCode,code: codeVerification, requestName:'Verification Code'};
         jsonToSend = JSON.stringify(jsonToSend);
     localStorage.setItem("verificationCode", codeVerification);
     let xhr = new XMLHttpRequest();

@@ -10,12 +10,12 @@ exports.create = () =>{
    const font14px = "14px roboto, noto";
    let userInfos = JSON.parse(localStorage.getItem("userInfos"));
        userInfos.requestName = 'Inscription';
-   const emailUser = userInfos.email;
+   const phoneUser = userInfos.email;
    userInfos = JSON.stringify(userInfos);
    const layoutDataHelper = {top:["prev()", 30],left:"10%",right:"10%"};
    const pageVerifNumberView = new Page({title: `Verification de votre adresse mail`, background:`#fafafa`}).appendTo(executeNavigationView);
    
-    const introText = new TextView({layoutData:{top:15,right:"10%",left:"10%"},font: font14px,text:`Nous vous avons envoyé un code de verification a l'adresse mail ${emailUser}`,textColor:"#212121",}).appendTo(pageVerifNumberView);
+    const introText = new TextView({layoutData:{top:15,right:"10%",left:"10%"},font: font14px,text:`Nous vous avons envoyé un code de verification a numéro suivant ${phoneUser}`,textColor:"#212121",}).appendTo(pageVerifNumberView);
     const labelVerifCode = new TextView({layoutData:layoutDataHelper,text:"VERIFICATION DU CODE",textColor:"#212121",font:"16px roboto, noto"}).appendTo(pageVerifNumberView);
     const codeInput = new TextInput({layoutData:{top:["prev()",0],left:"10%",right:"10%"},font: font14px,message: "Entrez le code",keyboard:"number",borderColor:"#e0e0e0"}).appendTo(pageVerifNumberView);  
 
@@ -45,8 +45,8 @@ exports.create = () =>{
                     pDialog("",true,false);
                     if(response.Message === "Inscription ok"){
                       window.plugins.toast.showLongBottom("Inscription effectuée");
-                    }else if(response.Message === "Cette adresse mail existe deja veuillez vous connecter"){
-                      window.plugins.toast.showLongBottom("Cette adresse mail existe deja veuillez vous connecter");
+                    }else if(response.Message === "Ce numéro de téléphone existe deja veuillez vous connecter"){
+                      window.plugins.toast.showLongBottom("Ce numéro de téléphone existe deja veuillez vous connecter");
                     }
                     executeNavigationView.dispose();
                     let connexionView = require('./connexion.js');
@@ -72,7 +72,7 @@ exports.create = () =>{
    
  let resendCode = new TextView({layoutData:{top:["prev()", 20],centerX:0},font: font14px,textColor:themeColor,text:"renvoyer le code"
     }).on("tap", () =>{
-      let resendCode = require("../modules/sendVerificationCode.js")(emailUser);
+      let resendCode = require("../modules/sendVerificationCode.js")(phoneUser);
     }).appendTo(pageVerifNumberView);
    
  return executeNavigationView;

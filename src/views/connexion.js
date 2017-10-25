@@ -14,7 +14,7 @@ exports.create = () =>{
   const scrollView = new ScrollView({left:0,right:0,top:0,background: "#fafafa",bottom:0}).appendTo(connexionView);
   const imageView = new ImageView({layoutData:{centerX: 0,width: 250,height: 150,top:20},image:"src/img/logo.png",scaleMode: "fit", id:"logo"}).appendTo(scrollView);
   const labelIdentifiant = new TextView({top:["prev()", 25],left:"10%",text:"IDENTIFIANT",textColor:"#212121",font:"16px roboto, noto"}).appendTo(scrollView);
-  const login = new TextInput({layoutData:{top:["prev()", 0],left:"10%",right:"10%"},font: font14px,message: "Votre adresse mail",keyboard:"email",borderColor:"#e0e0e0",id:'login'}).appendTo(scrollView);
+  const login = new TextInput({layoutData:{top:["prev()", 0],left:"10%",right:"10%"},font: font14px,message: "Votre téléphone",keyboard:"phone",borderColor:"#e0e0e0",id:'login'}).appendTo(scrollView);
   const labelPassword = new TextView({top:["prev()", 20],left:"10%",text:"MOT DE PASSE",textColor:"#212121",font:"16px roboto, noto"}).appendTo(scrollView);
   const password = new TextInput({layoutData:{top:["prev()", 0],left:"10%",right:"10%"},font: font14px,message: "Votre mot de passe",type:"password",borderColor:"#e0e0e0",id:'password'}).appendTo(scrollView);
   const button = new Button({layoutData:{ top:["prev()", 15],left:"10%",right:"10%"},font: font14px,textColor:"#fff",text:"Connexion",background: themeColor,elevation:0
@@ -22,20 +22,21 @@ exports.create = () =>{
       // On teste que les champs ne sont pas vides si c'est le cas on lance la verification du couple login mot de passe
       const loginValue = login.text;
       const passwordValue = password.text;
-      const regexMail =  /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+      const regexNumber = /^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$/;
+      const verifFirstDigit = loginValue.charAt(0);
       if(loginValue === "" || passwordValue === ""){
          messageInfo(connexionView,40,"Veuillez remplir tout les champs");  
-      }else if(!regexMail.test(loginValue)){
-         messageInfo(connexionView,40,"Veuillez entrer une adresse mail valide");
+      }else if(!regexNumber.test(loginValue) || verifFirstDigit !== "6" || loginValue.length !== 9){
+        messageInfo(connexionView,40,"Veuillez entrer un numéro de telephone valide");
       }else{
          let objectConnection = {identifiant:loginValue,password:passwordValue,requestName:'Connection'};
              objectConnection = JSON.stringify(objectConnection);
-         pDialog("Finalisation de l'inscription.",false,true);
+         pDialog("Connexion en cours.",false,true);
          const connectionAjax = require("../modules/ajax.js")(objectConnection,"https://www.afrikhealth.com/apiAssuranceLmr/apiConnection.php");
                connectionAjax.then((response)=>{
                 pDialog("",true,false);
                  if(response.Message === 'Connexion effectuée'){
-                  let dataUserToStore = {Id:response.Id,Identifiant:response.Identifiant,Adresse_mail:response.Adresse_mail};
+                  let dataUserToStore = {Id:response.Id,Identifiant:response.Identifiant,Adresse_mail:response.Adresse_mail,Telephone:response.Telephone};
                       dataUserToStore = JSON.stringify(dataUserToStore);
                   localStorage.setItem('storeUserInfos', dataUserToStore);
                   executeNavigationView.dispose();

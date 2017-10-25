@@ -40,11 +40,13 @@ exports.create = () =>{
            // je crée ce localStorage pour signifier a la vue de verification d'email que je veux etre redirigé 
            //vers la vue entrer un nouveau mot de passe ou la vue connexion
            localStorage.setItem('temporaryDataTypeOfViewToAskRedirection','InscriprionView');
-           let responseVerificationCode = require("../modules/sendVerificationCode.js")(emailValue);
+           let responseVerificationCode = require("../modules/sendVerificationCode.js")(phoneNumberValue);
                responseVerificationCode.then((response)=>{
                 if(response.Message === "Code envoye"){
                     let goToEnterVerificationCode = require("./checkCodeAndRedirect.js");
                         goToEnterVerificationCode.create();
+                  }else if(response.Message === "Erreur lors de l'envoi du code"){
+                    messageInfo(inscriptionView,40,"Impossible de vous envoyer un code de vérification veuillez essayer ultérieurement.");
                   }
                 }).catch(()=>{
                   messageInfo(inscriptionView,40,"Pas de connexion internet");
