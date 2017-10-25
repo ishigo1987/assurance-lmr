@@ -28,7 +28,7 @@ exports.create = ()=>{
   function createAndPopulateTab(whichTab,imageInsideEachTab,titleInsideEachTab,textInsideEachTab){
     const scrollViewInsideTabFolder = new ScrollView({left: 0,right: 0,top: 0,bottom:50}).appendTo(whichTab);
     const imgTab = new ImageView({centerX:0,scaleMode:'fit',width:180,height:180,top:"7%",image:imageInsideEachTab}).appendTo(scrollViewInsideTabFolder);
-    const titleInsideTab = new TextView({left:25,right:25,top:["prev()", 30],text:titleInsideEachTab,font:"24px roboto,noto",textColor:"#fff",markupEnabled:true}).appendTo(scrollViewInsideTabFolder);
+    const titleInsideTab = new TextView({left:25,right:25,top:["prev()", 30],text:titleInsideEachTab,font:"20px roboto,noto",textColor:"#fff",markupEnabled:true}).appendTo(scrollViewInsideTabFolder);
     const textTab = new TextView({left:25,right:25,top:["prev()", 15],text:textInsideEachTab,font:font16px,textColor:"#fff",markupEnabled:true}).appendTo(scrollViewInsideTabFolder);
   }
   // gestion du slider
