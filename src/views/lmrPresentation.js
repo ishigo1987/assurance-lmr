@@ -21,7 +21,7 @@ exports.create = ()=>{
   const tab1 = new Tab({title:'tab1'}).appendTo(tabFolder);
   const tab2 = new Tab({title:'tab2'}).appendTo(tabFolder);
   const tab3 = new Tab({title:'tab3'}).appendTo(tabFolder);
-  createAndPopulateTab(tab1,'src/img/logomsrassurances.png',"<br/><br/><big>M. Assurances</big>","");
+  createAndPopulateTab(tab1,'src/img/logomsrassurances.png',"M. Assurances","");
   createAndPopulateTab(tab2,'src/img/lmrvaleurs.png',"Les valeurs de M. Assurances","Nous développons notre savoir-faire dans le respect des valeurs mutualistes qui nous guide et nous permet de nous adapter à l’environnement dynamique dans lequel nous évoluons. L’information et la sensibilisation des assurés et non assurés sont notre raison d’être.");
   createAndPopulateTab(tab3,'src/img/notreequipe.png',"Notre équipe à disposition","Chez M. Assurances, vous disposez d’une équipe de professionnels avec une expérience de plus de 21 ans dans le domaine d’assurances. Nous saurons vous guider et vous proposer des solutions et services adaptés à vos besoins.");
   // function de creation et de remplissage des elements des tab du tabfolder
