@@ -39,6 +39,7 @@ exports.create = () =>{
                   let dataUserToStore = {Id:response.Id,Identifiant:response.Identifiant,Adresse_mail:response.Adresse_mail,Telephone:response.Telephone};
                       dataUserToStore = JSON.stringify(dataUserToStore);
                   localStorage.setItem('storeUserInfos', dataUserToStore);
+                  executeNavigationView.visible = false;
                   executeNavigationView.dispose();
                   const homeView = require('./home.js');
                         homeView.create();
