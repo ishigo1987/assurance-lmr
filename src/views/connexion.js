@@ -31,10 +31,10 @@ exports.create = () =>{
       }else{
          let objectConnection = {identifiant:loginValue,password:passwordValue,requestName:'Connection'};
              objectConnection = JSON.stringify(objectConnection);
-         pDialog("Connexion en cours.",false,true);
+         pDialog("Connexion en cours...",false,true);
          const connectionAjax = require("../modules/ajax.js")(objectConnection,"https://www.afrikhealth.com/apiAssuranceLmr/apiConnection.php");
                connectionAjax.then((response)=>{
-                pDialog("",true,false);
+                 pDialog("",true,false);
                  if(response.Message === 'Connexion effectuée'){
                   let dataUserToStore = {Id:response.Id,Identifiant:response.Identifiant,Adresse_mail:response.Adresse_mail,Telephone:response.Telephone};
                       dataUserToStore = JSON.stringify(dataUserToStore);
@@ -43,7 +43,7 @@ exports.create = () =>{
                   const homeView = require('./home.js');
                         homeView.create();
                  }else if(response.Message === 'Votre couple login, mot de passe ne correspond pas'){
-                  messageInfo(connexionView,80,response.Message);
+                  messageInfo(connexionView,40,response.Message);
                  }
                }).catch(()=>{
                 pDialog("",true,false);

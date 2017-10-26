@@ -1,10 +1,13 @@
 module.exports = (widgetToAppend)=>{
   const {Composite,TextView,ImageView} = require('tabris');
+  // const getText = require('../assurances.json');
+  //       getText = JSON.parse(getText);
+  //       console.log(getText);
   const compositeCard = new Composite({top:['prev()',5],left:5,right:5,height:150,elevation:2,cornerRadius:2,background:'#fff',id:'aRetirer'}).appendTo(widgetToAppend);
   const border = new Composite({left:0,top:0,bottom:0,width:3,background:'#1562AD',id:'border'}).appendTo(compositeCard);
   const titreRubrique =  new TextView({top:10,left:10,right:10,font:'15px roboto,noto',maxLines:1,text:'RESPONSABILITE CIVILE CHEF D’ENTREPRISE',textColor:'#212121'}).appendTo(compositeCard);
   const apercuTextRubrique = new TextView({top:['prev()',3],left:10,right:10,maxLines:4,textColor:'#757575',font:'14px roboto,noto',text:"L’assurance Responsabilité Civile Chef d’Entreprise vous couvre contre les dommages corporels, matériels et immatériels consécutifs causés aux tiers du fait de l’exercice de votre activité professionnelle. Elle concerne les entreprises industrielles, commerciales et de tourisme"}).appendTo(compositeCard);
-  const share = new TextView({top:['prev()',12],left:15,text:'PARTAGER',font:'15px roboto,noto',textColor:'#212121'})
+  const share = new TextView({top:['prev()',12],left:15,text:'PARTAGER',font:'14px roboto,noto',textColor:'#212121'})
   .on('tap',()=>{
     let messageToShare = titreRubrique.text + "\n" + apercuTextRubrique.text;
     window.plugins.socialsharing.share(messageToShare);

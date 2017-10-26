@@ -21,15 +21,15 @@ exports.create = ()=>{
   const tab1 = new Tab({title:'tab1'}).appendTo(tabFolder);
   const tab2 = new Tab({title:'tab2'}).appendTo(tabFolder);
   const tab3 = new Tab({title:'tab3'}).appendTo(tabFolder);
-  createAndPopulateTab(tab1,'src/img/logomsrassurances.png',"M. Assurances","");
-  createAndPopulateTab(tab2,'src/img/lmrvaleurs.png',"Les valeurs de M. Assurances","Nous développons notre savoir-faire dans le respect des valeurs mutualistes qui nous guide et nous permet de nous adapter à l’environnement dynamique dans lequel nous évoluons. L’information et la sensibilisation des assurés et non assurés sont notre raison d’être.");
-  createAndPopulateTab(tab3,'src/img/notreequipe.png',"Notre équipe à disposition","Chez M. Assurances, vous disposez d’une équipe de professionnels avec une expérience de plus de 21 ans dans le domaine d’assurances. Nous saurons vous guider et vous proposer des solutions et services adaptés à vos besoins.");
+  createAndPopulateTab(tab1,'src/img/logomsrassurances.png',"M. Assurances","est l'outil qui vient révolutionner le monde des assurances en vous permettant de vous renseigner et de faire les bons choix en matière d'assurances. Avec une base de données informatives, elle répond à toutes vos questions et vous permet également de souscrire à toute heure sans vous déplacer. Cette innovation s’accompagne d’un guichet automatique qui permettra aux assurés de renouveler leur prime d’assurances.");
+  createAndPopulateTab(tab2,'src/img/nos-valeurs.png',"Les valeurs de M. Assurances","Nous développons notre savoir-faire dans le respect des valeurs mutualistes qui nous guide et nous permet de nous adapter à l’environnement dynamique dans lequel nous évoluons. L’information et la sensibilisation des assurés et non assurés sont notre raison d’être.");
+  createAndPopulateTab(tab3,'src/img/notre-equipe.png',"Notre équipe à disposition","Chez M. Assurances, vous disposez d’une équipe de professionnels avec une expérience de plus de 21 ans dans le domaine d’assurances. Nous saurons vous guider et vous proposer des solutions et services adaptés à vos besoins.");
   // function de creation et de remplissage des elements des tab du tabfolder
   function createAndPopulateTab(whichTab,imageInsideEachTab,titleInsideEachTab,textInsideEachTab){
     const scrollViewInsideTabFolder = new ScrollView({left: 0,right: 0,top: 0,bottom:50}).appendTo(whichTab);
-    const imgTab = new ImageView({centerX:0,scaleMode:'fit',width:180,height:180,top:"7%",image:imageInsideEachTab}).appendTo(scrollViewInsideTabFolder);
-    const titleInsideTab = new TextView({left:25,right:25,top:["prev()", 30],text:titleInsideEachTab,font:"20px roboto,noto",textColor:"#fff",markupEnabled:true}).appendTo(scrollViewInsideTabFolder);
-    const textTab = new TextView({left:25,right:25,top:["prev()", 15],text:textInsideEachTab,font:font16px,textColor:"#fff",markupEnabled:true}).appendTo(scrollViewInsideTabFolder);
+    const imgTab = new ImageView({centerX:0,scaleMode:'fit',width:200,height:200,top:"1%",image:imageInsideEachTab}).appendTo(scrollViewInsideTabFolder);
+    const titleInsideTab = new TextView({left:25,right:25,top:["prev()", 20],text:titleInsideEachTab,font:"20px roboto,noto",textColor:"#fff",markupEnabled:true}).appendTo(scrollViewInsideTabFolder);
+    const textTab = new TextView({left:25,right:25,top:["prev()", 5],text:textInsideEachTab,font:font16px,textColor:"#fff",markupEnabled:true}).appendTo(scrollViewInsideTabFolder);
   }
   // gestion du slider
   const separator = new Composite({left:0,right:0,bottom:50,background:'#2c71b5',height:0.5}).appendTo(scrollView);

@@ -4,15 +4,19 @@ exports.create = () => {
     const {Page,TextView,Composite,ImageView,CollectionView,ui,ScrollView,SearchAction} = require('tabris');
     ui.contentView.background = '#fff';
     let createnavigationView;
-    let executeNavigationView = require("../helpers/navigationViewAnimation.js")(createnavigationView, false);
-        executeNavigationView.drawerActionVisible = true;
-    let objectUserInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
+    const executeNavigationView = require("../helpers/navigationViewAnimation.js")(createnavigationView, false);
+          executeNavigationView.drawerActionVisible = true;
+    const objectUserInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
     let createMenuActionIcon;
-    let handleActionCategorie = require("../helpers/actionIcons.js")(createMenuActionIcon, "Voir tous les types d'assurances", "srcImg", "low", executeNavigationView);
+    const actionSheetHome = require('../helpers/actionSheet.js');
+    let handleActionCategorie = require("../helpers/actionIcons.js")(createMenuActionIcon, "Voir toutes les catégories d'assurances", "srcImg", "low", executeNavigationView);
         handleActionCategorie.on("select",()=>{
-          console.log("you");
+            let as = actionSheetHome();
+                as.then((returnAs)=>{
+              
+            });
         });
-    let searchAction = new SearchAction({message: 'Rechercher une assurance',image: {src:'src/icons/search.png',scale:1.5}})
+    let searchAction = new SearchAction({message: 'Entrez une question',image: {src:'src/icons/search.png',scale:1.5}})
     .on({
      select:()=>{
       handleActionCategorie.visible = false;
@@ -69,7 +73,6 @@ exports.create = () => {
             title: "Déconnexion",
             image: "src/icons/logout.png"
      }];
-
     const drawerCollectionView = new CollectionView({
         right: 0,
         bottom: 0,
@@ -108,11 +111,14 @@ exports.create = () => {
         let itemIndex = itemConfig[index];
         drawer.close();
         if(itemIndex.title === "Demander un devis"){
-         const createDevisPage = require("./createDevis.js");
-               createDevisPage.create().appendTo(executeNavigationView);
+         require("./createDevis.js").create().appendTo(executeNavigationView);
+        }else if(itemIndex.title === "Poser une question à un agent"){
+         require('./speakToAnAgent.js')(executeNavigationView).appendTo(executeNavigationView);
+        }else if(itemIndex.title === "Mes paramètres"){
+         require('./settings.js')(executeNavigationView).appendTo(executeNavigationView);
         }else if(itemIndex.title === "Déconnexion") {
          executeNavigationView.dispose();
-         localStorage.removeItem("storeUserInfos");
+         localStorage.clear();
          let connexionPage = require("./connexion.js");
              connexionPage.create();
         }
