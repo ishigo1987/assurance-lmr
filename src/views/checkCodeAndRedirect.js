@@ -48,6 +48,7 @@ exports.create = () =>{
                     }else if(response.Message === "Ce numéro de téléphone existe deja veuillez vous connecter"){
                       window.plugins.toast.showLongBottom("Ce numéro de téléphone existe deja veuillez vous connecter");
                     }
+                    executeNavigationView.visible = false;
                     executeNavigationView.dispose();
                     let connexionView = require('./connexion.js');
                     connexionView.create();

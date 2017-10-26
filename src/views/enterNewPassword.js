@@ -32,6 +32,7 @@ exports.create = () =>{
              }else if(response.Message === "Cet utilisateur n'est pas dans la Bd"){
                 window.plugins.toast.showLongBottom("Ce numéro n'existe pas dans notre systeme, veuillez vous inscrire");
              }
+             executeNavigationViewPassword.visible = false;
              executeNavigationViewPassword.dispose();
              let connexionView = require('./connexion.js');
                  connexionView.create();
