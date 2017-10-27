@@ -2,7 +2,6 @@ exports.create = () => {
     "use strict";
     const themeColor = "#1562AD";
     const {Page,TextView,Composite,ImageView,CollectionView,ui,ScrollView,SearchAction} = require('tabris');
-    const pageToSeeFullAssurances = require('../views/fullAssurance.js');
     ui.contentView.background = '#fff';
     let createnavigationView;
     const executeNavigationView = require("../helpers/navigationViewAnimation.js")(createnavigationView, false);
@@ -10,18 +9,23 @@ exports.create = () => {
     const objectUserInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
     let createMenuActionIcon;
     const actionSheetHome = require('../helpers/actionSheet.js');
+    const alertDialog = require('../helpers/alertDialog.js');
     let handleActionCategorie = require("../helpers/actionIcons.js")(createMenuActionIcon, "Voir toutes les catégories d'assurances", "srcImg", "low", executeNavigationView);
         handleActionCategorie.on("select",()=>{
             let as = actionSheetHome();
                 as.then((returnAs)=>{
-                let t = homeView.find('#compositeCard');
+                let t = homeView.find('.compositeCard');
                 let i = t.length;
                 while(i--){
-                 if(String(t[i].title) !== String(returnAs)){
-                    pageToSeeFullAssurances(t[i].title,t[i].fullQuestions,t[i].fullResponses).appendTo(executeNavigationView);
+                 if(String(t[i].title) === String(returnAs)){
+                    let objectToTransport = {title:t[i].title,fullQuestions:t[i].fullQuestions,fullResponses:t[i].fullResponses};
+                    localStorage.setItem('objectToTransport',JSON.stringify(objectToTransport));
+                    const pageToSeeFullAssurances = require('./fullAssurance.js');
+                          pageToSeeFullAssurances.create().appendTo(executeNavigationView);
                  }
                 }
                 
+               
             });
         });
     let searchAction = new SearchAction({message:"Entrez une categorie d'assurance",image: {src:'src/icons/search.png',scale:1.5}})
@@ -29,7 +33,33 @@ exports.create = () => {
      select:()=>{
       handleActionCategorie.visible = false;
      },
-     accept:()=>{
+     accept:({text})=>{
+        let t = homeView.find('.compositeCard');
+        let i = t.length;
+        let stopLoop;
+        while(i--){
+         let titleTransform = t[i].title;
+         let textTransform = text;
+         titleTransform = titleTransform.toUpperCase();
+         textTransform = textTransform.toUpperCase();
+         if(String(titleTransform)=== String(textTransform)){
+            stopLoop = false;
+            let objectToTransport = {title:t[i].title,fullQuestions:t[i].fullQuestions,fullResponses:t[i].fullResponses};
+            localStorage.setItem('objectToTransport',JSON.stringify(objectToTransport));
+            const pageToSeeFullAssurances = require('./fullAssurance.js');
+            pageToSeeFullAssurances.create().appendTo(executeNavigationView);
+         }else{
+            if(stopLoop === undefined){
+                stopLoop = false;
+                let aD = alertDialog("Aucun résultat","Si vous ne trouvez pas résultat deux options s'offrent a vous.Entrez juste la categorie d'assurances(par exemple Automobile) ou bien posez votre question directement a un agent","Poser la question a un agent","Fermer");
+                    aD.then((response)=>{
+                     if(response === "button ok"){
+                       require('./speakToAnAgent.js')(executeNavigationView).appendTo(executeNavigationView); 
+                     }
+                   });
+            }
+         }
+        }
       handleActionCategorie.visible = true;
      }
     }).appendTo(executeNavigationView);
@@ -124,6 +154,8 @@ exports.create = () => {
          require('./speakToAnAgent.js')(executeNavigationView).appendTo(executeNavigationView);
         }else if(itemIndex.title === "Mes paramètres"){
          require('./settings.js')(executeNavigationView).appendTo(executeNavigationView);
+        }else if(itemIndex.title === "A propos de nous"){
+         require('./aboutUs.js').create().appendTo(executeNavigationView);
         }else if(itemIndex.title === "Déconnexion") {
          executeNavigationView.visible = false;
          executeNavigationView.dispose();

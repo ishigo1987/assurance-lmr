@@ -2,7 +2,7 @@ module.exports = (widgetToAppend,navigationViewToImport)=>{
   "use strict";
   const {Composite,TextView,ImageView,ActivityIndicator} = require('tabris');
   const messageInfo = require('../custom_widgets/snackbar.js');
-  const pageToSeeFullAssurances = require('../views/fullAssurance.js');
+  // const pageToSeeFullAssurances = require('../views/fullAssurance.js');
   const font14px = '14px roboto,noto';
   const themeColor = "#1562AD";
   const arrayOfColor = [themeColor,"#9c27b0","#e91e63","#d32f2f","#3949ab","#311b92","#00796b","#ef6c00","#424242","#455a64","#ff8f00","#388e3c","#0097a7","#5e35b1","#ef5350","#1565c0","#9e9d24"];
@@ -14,7 +14,7 @@ module.exports = (widgetToAppend,navigationViewToImport)=>{
          while(i--){
           let randomColor = Math.floor(Math.random() * 16) + 0;
           const title = response[i].Rubrique;
-          const compositeCard = new Composite({top:['prev()',5],left:5,right:5,height:150,elevation:2,cornerRadius:2,background:'#fff',id:"compositeCard"}).appendTo(widgetToAppend);
+          const compositeCard = new Composite({top:['prev()',5],left:5,right:5,height:150,elevation:2,cornerRadius:2,background:'#fff',class:"compositeCard",id:title}).appendTo(widgetToAppend);
                 compositeCard.title = title;
                 compositeCard.fullQuestions = response[i].Questions;
                 compositeCard.fullResponses = response[i].Reponses;
@@ -34,7 +34,9 @@ module.exports = (widgetToAppend,navigationViewToImport)=>{
                 readMore.fullResponses = response[i].Reponses;
                 readMore.title = response[i].Rubrique;
                 readMore.on("tap",function(){
-                  pageToSeeFullAssurances(this.title,this.fullQuestions,this.fullResponses).appendTo(navigationViewToImport);
+                  let objectToTransport = {title:this.title,fullQuestions:this.fullQuestions,fullResponses:this.fullResponses};
+                  localStorage.setItem('objectToTransport',JSON.stringify(objectToTransport));
+                  require('../views/fullAssurance.js').create().appendTo(navigationViewToImport);
                 });
         }
         }).catch(()=>{

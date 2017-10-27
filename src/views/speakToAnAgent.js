@@ -3,6 +3,8 @@ module.exports = (navigationViewToInsert)=>{
   const {Page,ScrollView,TextInput,Composite,TextView} = require('tabris');
   let createMenuActionIcon,categoryAssuranceSelected;
   const actionSheet = require('../helpers/actionSheet.js');
+  let messageInfo = require('../custom_widgets/snackbar.js');
+  const alertDialog = require('../helpers/alertDialog.js');
   const handleActionCategorie = require("../helpers/actionIcons.js")(createMenuActionIcon, "Selectionnez une catégorie d'assurances", "srcImg", "low", navigationViewToInsert);
   const sendMessage = require('../helpers/actionIcons.js')(createMenuActionIcon,"","src/icons/sendMessage.png","high",navigationViewToInsert);
   const themeColor = "#1562AD";
@@ -28,30 +30,32 @@ module.exports = (navigationViewToInsert)=>{
     let as = actionSheet();
     as.then((returnAs)=>{
      categoryAssuranceSelected = returnAs;
-     console.log(categoryAssuranceSelected);
     });
   });
   sendMessage.on('select',()=>{
-     const inputMessagValue = inputMessag.text;
+     let inputMessageValue = inputMessage.text;
      if(inputMessageValue === ""){
-
+      messageInfo(speakToAnAgentView,40,"Veuillez remplir le champ de question");
      }else if(categoryAssuranceSelected === undefined){
-
+      messageInfo(speakToAnAgentView,40,"Veuillez choisir une catégorie d'assurances");
      }else{
-       let dataToSend;
-      // Ici on verifie si l'utilisateur a choisi qu'on lui envoi la reponse a sa question par message
-      // Dans ce cas on envoi son numéro a l'agent lors de l'envoi de son message
-      if(userNotifications.Message === "On"){
-        dataToSend = {Id:userInformations.Id,Telephone:userInformations.Telephone,Question:inputMessagValue}
-      }else{
-        dataToSend = {Id:userInformations.Id,Question:inputMessagValue}
-      }
-      const ajax = require('../modules/ajax.js')(JSON.stringify(dataToSend),"https://www.afrikhealth.com/apiAssuranceLmr/apiConnection.php");
-            ajax.then((response)=>{
+      //  let dataToSend;
+      // // Ici on verifie si l'utilisateur a choisi qu'on lui envoi la reponse a sa question par message
+      // // Dans ce cas on envoi son numéro a l'agent lors de l'envoi de son message
+      // if(userNotifications.Message === "On"){
+      //   dataToSend = {Id:userInformations.Id,Telephone:userInformations.Telephone,Question:inputMessagValue}
+      // }else{
+      //   dataToSend = {Id:userInformations.Id,Question:inputMessagValue}
+      // }
+      // const ajax = require('../modules/ajax.js')(JSON.stringify(dataToSend),"https://www.afrikhealth.com/apiAssuranceLmr/apiConnection.php");
+      //       ajax.then((response)=>{
 
-            }).catch(()=>{
+      //       }).catch(()=>{
 
-            });
+      //       });
+      let aD = alertDialog("Messaye envoyé","Votre message a bien été envoyé un agent vous répondra dans un delai de 48h maximum","Ok merci","Fermer");
+      inputMessage.text = "";
+      
      }
   });
   return speakToAnAgentView;
