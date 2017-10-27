@@ -23,7 +23,7 @@ exports.create = ()=>{
   const tab3 = new Tab({title:'tab3'}).appendTo(tabFolder);
   createAndPopulateTab(tab1,'src/img/logomsrassurances.png',"M. Assurances","la première application qui vous dit tout sur les assurances");
   createAndPopulateTab(tab2,'src/img/nos-valeurs.png',"Les valeurs de M. Assurances","Souscrire à une assurance en ligne, calculer le coût de votre franchise, savoir si vous pouvez assurer un ordinateur ou vous donner des conseils au quotidien... c'est le rôle de l'application M. Assurances.");
-  createAndPopulateTab(tab3,'src/img/notre-equipe.png',"M. Assurances, c'est surtout une équipe de professionnels avec plus de 21 ans d'expérience disponible pour vous guider et vous proposer des solutions adaptées à vos besoins.");
+  createAndPopulateTab(tab3,'src/img/notre-equipe.png',"Notre equipe","M. Assurances, c'est surtout une équipe de professionnels avec plus de 21 ans d'expérience disponible pour vous guider et vous proposer des solutions adaptées à vos besoins.");
   // function de creation et de remplissage des elements des tab du tabfolder
   function createAndPopulateTab(whichTab,imageInsideEachTab,titleInsideEachTab,textInsideEachTab){
     const scrollViewInsideTabFolder = new ScrollView({left: 0,right: 0,top: 0,bottom:50}).appendTo(whichTab);
