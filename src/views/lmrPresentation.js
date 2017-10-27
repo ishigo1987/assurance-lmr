@@ -21,9 +21,9 @@ exports.create = ()=>{
   const tab1 = new Tab({title:'tab1'}).appendTo(tabFolder);
   const tab2 = new Tab({title:'tab2'}).appendTo(tabFolder);
   const tab3 = new Tab({title:'tab3'}).appendTo(tabFolder);
-  createAndPopulateTab(tab1,'src/img/logomsrassurances.png',"M. Assurances","est l'outil qui vient révolutionner le monde des assurances en vous permettant de vous renseigner et de faire les bons choix en matière d'assurances. Avec une base de données informatives, elle répond à toutes vos questions et vous permet également de souscrire à toute heure sans vous déplacer. Cette innovation s’accompagne d’un guichet automatique qui permettra aux assurés de renouveler leur prime d’assurances.");
-  createAndPopulateTab(tab2,'src/img/nos-valeurs.png',"Les valeurs de M. Assurances","Nous développons notre savoir-faire dans le respect des valeurs mutualistes qui nous guide et nous permet de nous adapter à l’environnement dynamique dans lequel nous évoluons. L’information et la sensibilisation des assurés et non assurés sont notre raison d’être.");
-  createAndPopulateTab(tab3,'src/img/notre-equipe.png',"Notre équipe à disposition","Chez M. Assurances, vous disposez d’une équipe de professionnels avec une expérience de plus de 21 ans dans le domaine d’assurances. Nous saurons vous guider et vous proposer des solutions et services adaptés à vos besoins.");
+  createAndPopulateTab(tab1,'src/img/logomsrassurances.png',"M. Assurances","la première application qui vous dit tout sur les assurances");
+  createAndPopulateTab(tab2,'src/img/nos-valeurs.png',"Les valeurs de M. Assurances","Souscrire à une assurance en ligne, calculer le coût de votre franchise, savoir si vous pouvez assurer un ordinateur ou vous donner des conseils au quotidien... c'est le rôle de l'application M. Assurances.");
+  createAndPopulateTab(tab3,'src/img/notre-equipe.png',"M. Assurances, c'est surtout une équipe de professionnels avec plus de 21 ans d'expérience disponible pour vous guider et vous proposer des solutions adaptées à vos besoins.");
   // function de creation et de remplissage des elements des tab du tabfolder
   function createAndPopulateTab(whichTab,imageInsideEachTab,titleInsideEachTab,textInsideEachTab){
     const scrollViewInsideTabFolder = new ScrollView({left: 0,right: 0,top: 0,bottom:50}).appendTo(whichTab);

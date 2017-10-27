@@ -2,6 +2,7 @@ exports.create = () => {
     "use strict";
     const themeColor = "#1562AD";
     const {Page,TextView,Composite,ImageView,CollectionView,ui,ScrollView,SearchAction} = require('tabris');
+    const pageToSeeFullAssurances = require('../views/fullAssurance.js');
     ui.contentView.background = '#fff';
     let createnavigationView;
     const executeNavigationView = require("../helpers/navigationViewAnimation.js")(createnavigationView, false);
@@ -13,10 +14,17 @@ exports.create = () => {
         handleActionCategorie.on("select",()=>{
             let as = actionSheetHome();
                 as.then((returnAs)=>{
-              
+                let t = homeView.find('#compositeCard');
+                let i = t.length;
+                while(i--){
+                 if(String(t[i].title) !== String(returnAs)){
+                    pageToSeeFullAssurances(t[i].title,t[i].fullQuestions,t[i].fullResponses).appendTo(executeNavigationView);
+                 }
+                }
+                
             });
         });
-    let searchAction = new SearchAction({message: 'Entrez une question',image: {src:'src/icons/search.png',scale:1.5}})
+    let searchAction = new SearchAction({message:"Entrez une categorie d'assurance",image: {src:'src/icons/search.png',scale:1.5}})
     .on({
      select:()=>{
       handleActionCategorie.visible = false;
@@ -42,10 +50,10 @@ exports.create = () => {
          drawer.enabled = false;
         }
     }).appendTo(executeNavigationView);
-    const scrollView = new ScrollView({ left: 0,right: 0,top: 40,bottom: 0}).appendTo(homeView);
+    const scrollView = new ScrollView({ left: 0,right: 0,top: 40,bottom:0}).appendTo(homeView);
     const typeOfAssuranceComposite = new Composite({top:0,left:0,right:0,height:40,background:"#2c71b5"}).appendTo(homeView);
     const textTypeOfAssurance = new TextView({centerX:0,centerY:0,maxLines:1,textColor:"#0e4479",text:"TOUTES LES ASSURANCES",font:"bold 16px roboto, noto"}).appendTo(typeOfAssuranceComposite);
-    require('../modules/cardHome.js')(scrollView);
+    require('../modules/cardHome.js')(scrollView,executeNavigationView);
 
     // Creation du composite du drawer
    const compositeDrawer = new Composite({left: 0,top: 0,height:100,right: 0,background: "#104e8a"}).appendTo(drawer);
@@ -117,6 +125,7 @@ exports.create = () => {
         }else if(itemIndex.title === "Mes paramètres"){
          require('./settings.js')(executeNavigationView).appendTo(executeNavigationView);
         }else if(itemIndex.title === "Déconnexion") {
+         executeNavigationView.visible = false;
          executeNavigationView.dispose();
          localStorage.clear();
          let connexionPage = require("./connexion.js");

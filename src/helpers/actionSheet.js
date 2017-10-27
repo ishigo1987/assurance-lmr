@@ -17,6 +17,7 @@ module.exports = ()=>{
           {title: "Transport des fonds"},
           {title: "Voyage ou maladie internationale"},
           {title: "Automobile"},
+          {title: "Prevoyance retraite"},
           {title: "Contrat indemnités de fin de carriere(IFC)"},
           {title: "Visa études plus"},
           {title: "Assistance frais funérailles"},

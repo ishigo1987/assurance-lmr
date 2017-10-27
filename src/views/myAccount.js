@@ -21,6 +21,7 @@ module.exports = (navigationViewToInsert)=>{
                 resultAjax.then((response)=>{
                   pDialog("",true,false);
                  if(response.Message === "Compte supprime"){
+                      navigationViewToInsert.visible = false;
                       navigationViewToInsert.dispose();
                       localStorage.clear();
                       require("./connexion.js").create();
