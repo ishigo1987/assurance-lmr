@@ -21,8 +21,8 @@ exports.create = ()=>{
   const tab1 = new Tab({title:'tab1'}).appendTo(tabFolder);
   const tab2 = new Tab({title:'tab2'}).appendTo(tabFolder);
   const tab3 = new Tab({title:'tab3'}).appendTo(tabFolder);
-  createAndPopulateTab(tab1,'src/img/logomsrassurances.png',"M. Assurances","la première application qui vous dit tout sur les assurances");
-  createAndPopulateTab(tab2,'src/img/nos-valeurs.png',"Les valeurs de M. Assurances","Souscrire à une assurance en ligne, calculer le coût de votre franchise, savoir si vous pouvez assurer un ordinateur ou vous donner des conseils au quotidien... c'est le rôle de l'application M. Assurances.");
+  createAndPopulateTab(tab1,'src/img/logomsrassurances.png',"M. Assurances","La première application qui vous dit tout sur les assurances");
+  createAndPopulateTab(tab2,'src/img/nos-valeurs.png',"Ici vous pouvez ...","Souscrire à une assurance en ligne, calculer le coût de votre franchise, savoir si vous pouvez assurer un ordinateur ou vous donner des conseils au quotidien... c'est le rôle de l'application M. Assurances.");
   createAndPopulateTab(tab3,'src/img/notre-equipe.png',"Notre equipe","M. Assurances, c'est surtout une équipe de professionnels avec plus de 21 ans d'expérience disponible pour vous guider et vous proposer des solutions adaptées à vos besoins.");
   // function de creation et de remplissage des elements des tab du tabfolder
   function createAndPopulateTab(whichTab,imageInsideEachTab,titleInsideEachTab,textInsideEachTab){

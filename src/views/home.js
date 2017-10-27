@@ -50,7 +50,7 @@ exports.create = () => {
          }else{
             if(stopLoop === undefined){
                 stopLoop = false;
-                let aD = alertDialog("Aucun résultat","Si vous ne trouvez pas résultat deux options s'offrent a vous.Entrez juste la categorie d'assurances(par exemple Automobile) ou bien posez votre question directement a un agent","Poser la question a un agent","Fermer");
+                let aD = alertDialog("Aucun résultat","Si vous ne trouvez pas résultat deux options s'offrent a vous.Entrez juste la catégorie d'assurances(par exemple Automobile) ou bien posez votre question directement a un agent","Poser la question a un agent","Fermer");
                     aD.then((response)=>{
                      if(response === "button ok"){
                        require('./speakToAnAgent.js')(executeNavigationView).appendTo(executeNavigationView); 
