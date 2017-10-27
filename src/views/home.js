@@ -43,7 +43,6 @@ exports.create = () => {
          titleTransform = titleTransform.toUpperCase();
          textTransform = textTransform.toUpperCase();
          if(String(titleTransform)=== String(textTransform)){
-            stopLoop = false;
             let objectToTransport = {title:t[i].title,fullQuestions:t[i].fullQuestions,fullResponses:t[i].fullResponses};
             localStorage.setItem('objectToTransport',JSON.stringify(objectToTransport));
             const pageToSeeFullAssurances = require('./fullAssurance.js');
