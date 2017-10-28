@@ -1,7 +1,10 @@
 exports.create =()=>{
  const {Page,ScrollView,TextInput,Button,Composite,TextView,Picker,Slider,Switch,RadioButton} = require('tabris');
+ const calculDevis = require('../modules/calculDevis.js');
  let labelAnim = require('../helpers/animateLabel.js');
  let messageInfo = require('../custom_widgets/snackbar.js');
+ const alertDialog = require('../helpers/alertDialog.js');
+ const pDialog = require("../plugins/pDialog.js");
  const themeColor = "#1562AD";
  const categoryList = ['Catégorie 1','Catégorie 2','Catégorie 3','Catégorie 4','Catégorie 5'];
  const zoneList = ['Zone A','Zone B','Zone C'];
@@ -156,7 +159,83 @@ exports.create =()=>{
  const duree = new TextInput({layoutData:{top:["prev()",0],left:"10%",right:"10%"},font: font14px,message: "Durée en jours",borderColor:"#e0e0e0",class:'animLabel',id:'duree',keyboard:'number'}).appendTo(scrollView);
  const button = new Button({layoutData:{top:["prev()", 30],left:"10%",right:"10%"},font: font14px,textColor:"#fff",text:"Calculer",background:themeColor})
  .on('select',()=>{
-
+  let objectOfValueToSend = {};
+  const categoryValue = categoryList[pickerCategorie.selectionIndex];
+  const zoneValue = zoneList[ pickerZone.selectionIndex];
+  const dureeValue = duree.text;
+  const chassisValue = chassis.text;
+  const placeNumberValue = placeNumber.text;
+  if(duree.visible === true && dureeValue === ""){
+    messageInfo(createDevisView,40,"Veuillez entrer une durée en jours ou en mois");
+  }else if(chassis.visible === true && chassisValue === ""){
+    messageInfo(createDevisView,40,"Veuillez entrer un chassis");
+  }else if(placeNumber.visible === true && placeNumberValue === ""){
+    messageInfo(createDevisView,40,"Veuillez entrer un nombre de places");
+  }else{
+    objectOfValueToSend.category = categoryValue;
+    objectOfValueToSend.zone = zoneValue;
+    // On verifie si c'est la catégorie 1 dans ce cas on prend la valeur de remorque(oui ou non)
+    if(categoryValue === "Catégorie 1"){
+      let remorqueValue = switchRemorque.checked;
+      if(remorqueValue === false){
+        remorqueValue = "Non";
+      }else{
+        remorqueValue = "Oui";
+      }
+     objectOfValueToSend.remorque = remorqueValue;
+    }
+   // On verifie si c'est la catégorie 2 ou 3 dans ce cas on prend la valeur de la remorque(avec,sans ou matiére inflammable)
+   if(categoryValue === "Catégorie 2" || categoryValue === "Catégorie 3"){
+     const sansRemorqueValue = sansRemorque.checked;
+     const avecRemorqueValue = avecRemorque.checked;
+     const inflammableRemorqueValue = inflammableRemorque.checked;
+     if(sansRemorqueValue === false && avecRemorqueValue === false && inflammableRemorqueValue === false){
+       objectOfValueToSend.remorque = "Non";
+     }else{
+       objectOfValueToSend.remorque = "Oui";
+     }
+   }
+   // on verifie si on est sur une categorie autre que la 5 et on récupere la valeur de l'energie et la puissance
+   if(categoryValue !== "Catégorie 5"){
+      const energyValue = energieList[pickerEnergie.selectionIndex];
+      const puissanceValue = sliderPuissance.selection;
+      const dureeValue = duree.text;
+      if(categoryValue !== "Catégorie 4"){
+        objectOfValueToSend.dureeJour = dureeValue;
+      }else{
+        // La on gere la catégorie 4
+        objectOfValueToSend.placeNumber = placeNumberValue;
+        objectOfValueToSend.dureeMois = dureeValue;
+      }
+      objectOfValueToSend.energy = energyValue;
+      objectOfValueToSend.puissance = puissanceValue;
+    }else{
+      // on est dans la categorie 5
+      const dureeValue = duree.text;
+      let scooterValue = switchScooter.checked;
+      let remorqueValue = switchRemorque.checked;
+      if(scooterValue === false){
+        scooterValue = "Non";
+      }else{
+        scooterValue = "Oui";
+      }
+      if(remorqueValue === false){
+        remorqueValue = "Non";
+      }else{
+        remorqueValue = "Oui";
+      }
+      objectOfValueToSend.scooter = scooterValue;
+      objectOfValueToSend.chassis = chassisValue;
+      objectOfValueToSend.remorque = remorqueValue;
+      objectOfValueToSend.dureeJour = dureeValue;
+    }
+    const returnCalculDevis = calculDevis(objectOfValueToSend);
+          returnCalculDevis.then((result)=>{
+           let aD = alertDialog("Résultat",`Votre prime nette s'élève à ${result} Fcfa`,"","Fermer");
+          }).catch((e)=>{
+           console.log(e);
+          }); 
+  }
  }).appendTo(scrollView);
  return createDevisView;
 };
