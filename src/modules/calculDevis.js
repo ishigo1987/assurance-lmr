@@ -76,10 +76,10 @@ module.exports = (devisData)=>{
             if(puissance <= 2 && remorque === "Oui" && (energy === "Essence" || energy === "Diesel")){rca = 67566;}
             if(((energy === "Essence" && puissance > 2 && puissance < 7)||(energy === "Diesel" && puissance > 1 && puissance < 5 )) && remorque === "Non" ){rca = 68217;}
             if(((energy === "Essence" && puissance > 2 && puissance < 7)||(energy === "Diesel" && puissance > 1 && puissance < 5 )) && remorque === "Oui" ){rca = 81860;}
-            if(((energy === "Essence" && puissance > 6 && puissance < 11)||(energy === "Diesel" && puissance > 4 && puissance < 6 )) && remorque === "Non" ){rca = 77547;}
-            if(((energy === "Essence" && puissance > 6 && puissance < 11)||(energy === "Diesel" && puissance > 4 && puissance < 6 )) && remorque === "Oui" ){rca = 93056;}
-            if(((energy === "Essence" && puissance > 10 && puissance < 15)||(energy === "Diesel" && puissance > 7 && puissance < 11 )) && remorque === "Non" ){rca = 116162;}
-            if(((energy === "Essence" && puissance > 10 && puissance < 15)||(energy === "Diesel" && puissance > 7 && puissance < 11 )) && remorque === "Oui" ){rca = 139394;}
+            if(((energy === "Essence" && puissance > 6 && puissance < 11)||(energy === "Diesel" && puissance > 4 && puissance < 7 )) && remorque === "Non" ){rca = 77547;}
+            if(((energy === "Essence" && puissance > 6 && puissance < 11)||(energy === "Diesel" && puissance > 4 && puissance < 7 )) && remorque === "Oui" ){rca = 93056;}
+            if(((energy === "Essence" && puissance > 10 && puissance < 15)||(energy === "Diesel" && puissance > 6 && puissance < 11 )) && remorque === "Non" ){rca = 116162;}
+            if(((energy === "Essence" && puissance > 10 && puissance < 15)||(energy === "Diesel" && puissance > 6 && puissance < 11 )) && remorque === "Oui" ){rca = 139394;}
             if(((energy === "Essence" && puissance > 14 && puissance < 24)||(energy === "Diesel" && puissance > 10 && puissance < 17 )) && remorque === "Non" ){rca = 143833;}
             if(((energy === "Essence" && puissance > 14 && puissance < 24)||(energy === "Diesel" && puissance > 10 && puissance < 17 )) && remorque === "Oui" ){rca = 172599;}
             if(((energy === "Essence" && puissance > 23)||(energy === "Diesel" && puissance > 17)) && remorque === "Non" ){rca = 166358;}
@@ -89,10 +89,10 @@ module.exports = (devisData)=>{
             if(puissance <= 2 && remorque === "Oui" && (energy === "Essence" || energy === "Diesel")){rca = 64628;}
             if(((energy === "Essence" && puissance > 2 && puissance < 7)||(energy === "Diesel" && puissance > 1 && puissance < 5 )) && remorque === "Non" ){rca = 65251;}
             if(((energy === "Essence" && puissance > 2 && puissance < 7)||(energy === "Diesel" && puissance > 1 && puissance < 5 )) && remorque === "Oui" ){rca = 78301;}
-            if(((energy === "Essence" && puissance > 6 && puissance < 11)||(energy === "Diesel" && puissance > 4 && puissance < 6 )) && remorque === "Non" ){rca = 74175;}
-            if(((energy === "Essence" && puissance > 6 && puissance < 11)||(energy === "Diesel" && puissance > 4 && puissance < 6 )) && remorque === "Oui" ){rca = 89010;}
-            if(((energy === "Essence" && puissance > 10 && puissance < 15)||(energy === "Diesel" && puissance > 7 && puissance < 11 )) && remorque === "Non" ){rca = 111111;}
-            if(((energy === "Essence" && puissance > 10 && puissance < 15)||(energy === "Diesel" && puissance > 7 && puissance < 11 )) && remorque === "Oui" ){rca = 133333;}
+            if(((energy === "Essence" && puissance > 6 && puissance < 11)||(energy === "Diesel" && puissance > 4 && puissance < 7 )) && remorque === "Non" ){rca = 74175;}
+            if(((energy === "Essence" && puissance > 6 && puissance < 11)||(energy === "Diesel" && puissance > 4 && puissance < 7 )) && remorque === "Oui" ){rca = 89010;}
+            if(((energy === "Essence" && puissance > 10 && puissance < 15)||(energy === "Diesel" && puissance > 6 && puissance < 11 )) && remorque === "Non" ){rca = 111111;}
+            if(((energy === "Essence" && puissance > 10 && puissance < 15)||(energy === "Diesel" && puissance > 6 && puissance < 11 )) && remorque === "Oui" ){rca = 133333;}
             if(((energy === "Essence" && puissance > 14 && puissance < 24)||(energy === "Diesel" && puissance > 10 && puissance < 17 )) && remorque === "Non" ){rca = 133333;}
             if(((energy === "Essence" && puissance > 14 && puissance < 24)||(energy === "Diesel" && puissance > 10 && puissance < 17 )) && remorque === "Oui" ){rca = 165095;}
             if(((energy === "Essence" && puissance > 23)||(energy === "Diesel" && puissance > 17)) && remorque === "Non" ){rca = 159125;}
@@ -105,10 +105,10 @@ module.exports = (devisData)=>{
             if(puissance <= 2 && remorque === "Oui" && (energy === "Essence" || energy === "Diesel")){rca = 122257;}
             if(((energy === "Essence" && puissance > 2 && puissance < 7)||(energy === "Diesel" && puissance > 1 && puissance < 5 )) && remorque === "Non" ){rca = 116045;}
             if(((energy === "Essence" && puissance > 2 && puissance < 7)||(energy === "Diesel" && puissance > 1 && puissance < 5 )) && remorque === "Oui" ){rca = 150858;}
-            if(((energy === "Essence" && puissance > 6 && puissance < 11)||(energy === "Diesel" && puissance > 4 && puissance < 6 )) && remorque === "Non" ){rca = 132900;}
-            if(((energy === "Essence" && puissance > 6 && puissance < 11)||(energy === "Diesel" && puissance > 4 && puissance < 6 )) && remorque === "Oui" ){rca = 172771;}
-            if(((energy === "Essence" && puissance > 10 && puissance < 15)||(energy === "Diesel" && puissance > 7 && puissance < 11 )) && remorque === "Non" ){rca = 196282;}
-            if(((energy === "Essence" && puissance > 10 && puissance < 15)||(energy === "Diesel" && puissance > 7 && puissance < 11 )) && remorque === "Oui" ){rca = 255167;}
+            if(((energy === "Essence" && puissance > 6 && puissance < 11)||(energy === "Diesel" && puissance > 4 && puissance < 7 )) && remorque === "Non" ){rca = 132900;}
+            if(((energy === "Essence" && puissance > 6 && puissance < 11)||(energy === "Diesel" && puissance > 4 && puissance < 7 )) && remorque === "Oui" ){rca = 172771;}
+            if(((energy === "Essence" && puissance > 10 && puissance < 15)||(energy === "Diesel" && puissance > 6 && puissance < 11 )) && remorque === "Non" ){rca = 196282;}
+            if(((energy === "Essence" && puissance > 10 && puissance < 15)||(energy === "Diesel" && puissance > 6 && puissance < 11 )) && remorque === "Oui" ){rca = 255167;}
             if(((energy === "Essence" && puissance > 14 && puissance < 24)||(energy === "Diesel" && puissance > 10 && puissance < 17 )) && remorque === "Non" ){rca = 250210;}
             if(((energy === "Essence" && puissance > 14 && puissance < 24)||(energy === "Diesel" && puissance > 10 && puissance < 17 )) && remorque === "Oui" ){rca = 325272;}
             if(((energy === "Essence" && puissance > 23)||(energy === "Diesel" && puissance > 17)) && remorque === "Non" ){rca = 290326;}
@@ -118,10 +118,10 @@ module.exports = (devisData)=>{
             if(puissance <= 2 && remorque === "Oui" && (energy === "Essence" || energy === "Diesel")){rca = 117163;}
             if(((energy === "Essence" && puissance > 2 && puissance < 7)||(energy === "Diesel" && puissance > 1 && puissance < 5 )) && remorque === "Non" ){rca = 111210;}
             if(((energy === "Essence" && puissance > 2 && puissance < 7)||(energy === "Diesel" && puissance > 1 && puissance < 5 )) && remorque === "Oui" ){rca = 144572;}
-            if(((energy === "Essence" && puissance > 6 && puissance < 11)||(energy === "Diesel" && puissance > 4 && puissance < 6 )) && remorque === "Non" ){rca = 127363;}
-            if(((energy === "Essence" && puissance > 6 && puissance < 11)||(energy === "Diesel" && puissance > 4 && puissance < 6 )) && remorque === "Oui" ){rca = 165572;}
-            if(((energy === "Essence" && puissance > 10 && puissance < 15)||(energy === "Diesel" && puissance > 7 && puissance < 11 )) && remorque === "Non" ){rca = 188103;}
-            if(((energy === "Essence" && puissance > 10 && puissance < 15)||(energy === "Diesel" && puissance > 7 && puissance < 11 )) && remorque === "Oui" ){rca = 244535;}
+            if(((energy === "Essence" && puissance > 6 && puissance < 11)||(energy === "Diesel" && puissance > 4 && puissance < 7 )) && remorque === "Non" ){rca = 127363;}
+            if(((energy === "Essence" && puissance > 6 && puissance < 11)||(energy === "Diesel" && puissance > 4 && puissance < 7 )) && remorque === "Oui" ){rca = 165572;}
+            if(((energy === "Essence" && puissance > 10 && puissance < 15)||(energy === "Diesel" && puissance > 6 && puissance < 11 )) && remorque === "Non" ){rca = 188103;}
+            if(((energy === "Essence" && puissance > 10 && puissance < 15)||(energy === "Diesel" && puissance > 6 && puissance < 11 )) && remorque === "Oui" ){rca = 244535;}
             if(((energy === "Essence" && puissance > 14 && puissance < 24)||(energy === "Diesel" && puissance > 10 && puissance < 17 )) && remorque === "Non" ){rca = 239784;}
             if(((energy === "Essence" && puissance > 14 && puissance < 24)||(energy === "Diesel" && puissance > 10 && puissance < 17 )) && remorque === "Oui" ){rca = 311719;}
             if(((energy === "Essence" && puissance > 23)||(energy === "Diesel" && puissance > 17)) && remorque === "Non" ){rca = 278229;}
@@ -131,10 +131,10 @@ module.exports = (devisData)=>{
             if(puissance <= 2 && remorque === "Oui" && (energy === "Essence" || energy === "Diesel")){rca = 112069;}
             if(((energy === "Essence" && puissance > 2 && puissance < 7)||(energy === "Diesel" && puissance > 1 && puissance < 5 )) && remorque === "Non" ){rca = 106374;}
             if(((energy === "Essence" && puissance > 2 && puissance < 7)||(energy === "Diesel" && puissance > 1 && puissance < 5 )) && remorque === "Oui" ){rca = 138287;}
-            if(((energy === "Essence" && puissance > 6 && puissance < 11)||(energy === "Diesel" && puissance > 4 && puissance < 6 )) && remorque === "Non" ){rca = 121825;}
-            if(((energy === "Essence" && puissance > 6 && puissance < 11)||(energy === "Diesel" && puissance > 4 && puissance < 6 )) && remorque === "Oui" ){rca = 158374;}
-            if(((energy === "Essence" && puissance > 10 && puissance < 15)||(energy === "Diesel" && puissance > 7 && puissance < 11 )) && remorque === "Non" ){rca = 179925;}
-            if(((energy === "Essence" && puissance > 10 && puissance < 15)||(energy === "Diesel" && puissance > 7 && puissance < 11 )) && remorque === "Oui" ){rca = 233903;}
+            if(((energy === "Essence" && puissance > 6 && puissance < 11)||(energy === "Diesel" && puissance > 4 && puissance < 7 )) && remorque === "Non" ){rca = 121825;}
+            if(((energy === "Essence" && puissance > 6 && puissance < 11)||(energy === "Diesel" && puissance > 4 && puissance < 7 )) && remorque === "Oui" ){rca = 158374;}
+            if(((energy === "Essence" && puissance > 10 && puissance < 15)||(energy === "Diesel" && puissance > 6 && puissance < 11 )) && remorque === "Non" ){rca = 179925;}
+            if(((energy === "Essence" && puissance > 10 && puissance < 15)||(energy === "Diesel" && puissance > 6 && puissance < 11 )) && remorque === "Oui" ){rca = 233903;}
             if(((energy === "Essence" && puissance > 14 && puissance < 24)||(energy === "Diesel" && puissance > 10 && puissance < 17 )) && remorque === "Non" ){rca = 229359;}
             if(((energy === "Essence" && puissance > 14 && puissance < 24)||(energy === "Diesel" && puissance > 10 && puissance < 17 )) && remorque === "Oui" ){rca = 298166;}
             if(((energy === "Essence" && puissance > 23)||(energy === "Diesel" && puissance > 17)) && remorque === "Non" ){rca = 266132;}
