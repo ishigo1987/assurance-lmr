@@ -194,6 +194,9 @@ exports.create =()=>{
      }else{
        objectOfValueToSend.remorque = "Oui";
      }
+    //  sansRemorqueValue === false ? objectOfValueToSend.remorque = "Non" : objectOfValueToSend.remorque = "Oui";
+    //  avecRemorqueValue === false ? objectOfValueToSend.remorque = "Non" : objectOfValueToSend.remorque = "Oui";
+    //  inflammableRemorqueValue === false ? objectOfValueToSend.remorque = "Non" : objectOfValueToSend.remorque = "Oui";
    }
    // on verifie si on est sur une categorie autre que la 5 et on récupere la valeur de l'energie et la puissance
    if(categoryValue !== "Catégorie 5"){
@@ -229,6 +232,7 @@ exports.create =()=>{
       objectOfValueToSend.remorque = remorqueValue;
       objectOfValueToSend.dureeJour = dureeValue;
     }
+    console.log(objectOfValueToSend);
     const returnCalculDevis = calculDevis(objectOfValueToSend);
           returnCalculDevis.then((result)=>{
            let aD = alertDialog("Résultat",`Votre prime nette s'élève à ${result} Fcfa`,"","Fermer");
