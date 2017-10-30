@@ -11,7 +11,7 @@ module.exports = (navigationViewToInsert)=>{
   const font14px ="14px roboto, noto";
   const userInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
   const userNotifications = JSON.parse(localStorage.getItem('notifications'));
-  const speakToAnAgentView = new Page({title: `Parler a un agent`,background:`#fafafa`})
+  const speakToAnAgentView = new Page({title: `Parler à un agent`,background:`#fafafa`})
   .on({
     appear: ()=>{
       handleActionCategorie.visible = true;
@@ -53,7 +53,7 @@ module.exports = (navigationViewToInsert)=>{
       //       }).catch(()=>{
 
       //       });
-      let aD = alertDialog("Messaye envoyé","Votre message a bien été envoyé un agent vous répondra dans un delai de 48h maximum","Ok merci","Fermer");
+      let aD = alertDialog("Messaye envoyé","Votre message a bien été envoyé un agent vous répondra dans un delai de 24h maximum","Ok merci","Fermer");
       inputMessage.text = "";
       
      }

@@ -32,8 +32,8 @@ exports.create =()=>{
      if(categoryListIndex === "Catégorie 1"){
        labelRemorque.visible = true;
        labelRemorque.text = "AVEC REMORQUE";
-       labelRemorque.top = ["#sliderPuissance",20];
-       switchRemorque.top = ["#sliderPuissance",15];
+       labelRemorque.top = ["#inputPuissance",20];
+       switchRemorque.top = ["#inputPuissance",15];
        labelDuree.top = ["#labelRemorque", 20];
        switchRemorque.visible = true;
        sansRemorque.visible = false;
@@ -49,8 +49,7 @@ exports.create =()=>{
        pickerEnergie.visible = true;
        pickerEnergie.top = ["prev()",0];
        labelPuissance.visible = true;
-       sliderPuissance.visible = true;
-       textSliderPuissance.visible = true;
+       inputPuissance.visible = true;
        chassis.visible = false;
        duree.message = "Durée en jours";
      }else if(categoryListIndex === "Catégorie 2" || categoryListIndex === "Catégorie 3"){
@@ -73,9 +72,8 @@ exports.create =()=>{
       pickerEnergie.visible = true;
       pickerEnergie.top = ["prev()",0];
       labelPuissance.visible = true;
-      sliderPuissance.visible = true;
-      textSliderPuissance.visible = true;
-      labelRemorque.top = ["#sliderPuissance",20];
+      inputPuissance.visible = true;
+      labelRemorque.top = ["#inputPuissance",20];
     }else if(categoryListIndex === "Catégorie 4"){
       sansRemorque.visible = false;
       avecRemorque.visible = false;
@@ -95,16 +93,14 @@ exports.create =()=>{
       pickerEnergie.visible = true;
       pickerEnergie.top = ["prev()",0];
       labelPuissance.visible = true;
-      sliderPuissance.visible = true;
-      textSliderPuissance.visible = true;
+      inputPuissance.visible = true;
     }else if(categoryListIndex === "Catégorie 5"){
       duree.message = "Durée en jours";
       labelEnergie.top = ["prev()", 20];
       labelEnergie.visible = false;
       pickerEnergie.visible = false;
       labelPuissance.visible = false;
-      sliderPuissance.visible = false;
-      textSliderPuissance.visible = false;
+      inputPuissance.visible = false;
       labelPlaceNumber.visible = false;
       placeNumber.visible = false;
       sansRemorque.visible = false;
@@ -143,15 +139,15 @@ exports.create =()=>{
 
  }).appendTo(scrollView);
  const labelPuissance = new TextView({top:["prev()", 20],left:"10%",text:"PUISSANCE",textColor:"#212121",font:"16px roboto, noto",id:'labelPuissance'}).appendTo(scrollView);
- const textSliderPuissance = new TextView({top:["#labelPuissance",5],right:"8%",textColor:"#212121",text:"0"}).appendTo(scrollView);
- const sliderPuissance = new Slider({top:["#labelPuissance",0],left:"7%",right:"12%",tintColor:themeColor,minimum:'0',maximum:'500',selection:0,class:'animLabel',id:'sliderPuissance'})
- .on("selectionChanged",({value})=>{
-    textSliderPuissance.text = value;
- }).appendTo(scrollView);
+ const inputPuissance = new TextInput({top:["#labelPuissance",5],left:"10%",right:"10%",textColor:"#212121",message:'Entrez la puissance',font:font14px,borderColor:"#e0e0e0",keyboard:'number',id:'inputPuissance'}).appendTo(scrollView);
+//  const inputPuissance = new Slider({top:["#labelPuissance",0],left:"7%",right:"12%",tintColor:themeColor,minimum:'0',maximum:'500',selection:0,class:'animLabel',id:'inputPuissance'})
+//  .on("selectionChanged",({value})=>{
+//     textinputPuissance.text = value;
+//  }).appendTo(scrollView);
  const labelPlaceNumber = new TextView({top:["prev()", 20],left:"10%",text:"NOMBRE DE PLACES",textColor:"#212121",font:"16px roboto, noto",id:'labelplaceNumber',visible:false}).appendTo(scrollView);
  const placeNumber = new TextInput({layoutData:{top:["prev()",0],left:"10%",right:"10%"},font: font14px,message: "Nombre de places",borderColor:"#e0e0e0",class:'animLabel',id:'placeNumber',keyboard:'number',visible:false}).appendTo(scrollView);
- const labelRemorque = new TextView({top:["#sliderPuissance", 20],left:"10%",text:"AVEC REMORQUE",textColor:"#212121",font:"16px roboto, noto",id:'labelRemorque'}).appendTo(scrollView);
- const switchRemorque = new Switch({top:["#sliderPuissance",15],left:["#labelRemorque",30],checked:false,thumbOnColor:themeColor,trackOnColor:"#a1c0de"}).appendTo(scrollView);
+ const labelRemorque = new TextView({top:["#inputPuissance", 20],left:"10%",text:"AVEC REMORQUE",textColor:"#212121",font:"16px roboto, noto",id:'labelRemorque'}).appendTo(scrollView);
+ const switchRemorque = new Switch({top:["#inputPuissance",15],left:["#labelRemorque",30],checked:false,thumbOnColor:themeColor,trackOnColor:"#a1c0de"}).appendTo(scrollView);
  const sansRemorque = new RadioButton({top:["#labelRemorque", 5],left:"10%",text:"Sans",font:'14px roboto,noto',checkedTintColor:themeColor,visible:false}).appendTo(scrollView);
  const avecRemorque = new RadioButton({top:["#labelRemorque", 5],left:["prev()",5],text:"Avec",font:'14px roboto,noto',checkedTintColor:themeColor,visible:false}).appendTo(scrollView);
  const inflammableRemorque = new RadioButton({top:["#labelRemorque", 5],left:["prev()",5],text:"Matière inflammable",font:'14px roboto,noto',checkedTintColor:themeColor,visible:false}).appendTo(scrollView);
@@ -196,7 +192,7 @@ exports.create =()=>{
    // on verifie si on est sur une categorie autre que la 5 et on récupere la valeur de l'energie et la puissance
    if(categoryValue !== "Catégorie 5"){
       const energyValue = energieList[pickerEnergie.selectionIndex];
-      const puissanceValue = sliderPuissance.selection;
+      const puissanceValue = inputPuissance.text;
       const dureeValue = duree.text;
       if(categoryValue !== "Catégorie 4"){
         objectOfValueToSend.dureeJour = dureeValue;
@@ -227,6 +223,7 @@ exports.create =()=>{
       objectOfValueToSend.remorque = remorqueValue;
       objectOfValueToSend.dureeJour = dureeValue;
     }
+    console.log(objectOfValueToSend);
     const returnCalculDevis = calculDevis(objectOfValueToSend);
           returnCalculDevis.then((result)=>{
            let aD = alertDialog("Résultat",`Votre prime nette s'élève à ${result} Fcfa`,"","Fermer");

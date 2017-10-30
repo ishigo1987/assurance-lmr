@@ -21,14 +21,14 @@ exports.create = ()=>{
   const tab1 = new Tab({title:'tab1'}).appendTo(tabFolder);
   const tab2 = new Tab({title:'tab2'}).appendTo(tabFolder);
   const tab3 = new Tab({title:'tab3'}).appendTo(tabFolder);
-  createAndPopulateTab(tab1,'src/img/logo_m_assurances.png',"M. Assurances","La première application qui vous dit tout sur les assurances");
-  createAndPopulateTab(tab2,'src/img/nos-valeurs.png',"Ici vous pouvez ...","Souscrire à une assurance en ligne, calculer le coût de votre franchise, savoir si vous pouvez assurer un ordinateur ou vous donner des conseils au quotidien... c'est le rôle de l'application M. Assurances.");
+  createAndPopulateTab(tab1,'src/img/logo_m_assurances.png',"M. Assurances","La première application qui vous dit tout sur les assurances.");
+  createAndPopulateTab(tab2,'src/img/nos-valeurs.png',"Avec l’application M. Assurances, vous pouvez…","Vous informer sur les types d’assurances<br />Trouver des réponses à vos interrogations<br />Effectuer votre devis<br />Souscrire une assurance en ligne.");
   createAndPopulateTab(tab3,'src/img/notre_equipe.png',"Notre equipe","M. Assurances, c'est surtout une équipe de professionnels avec plus de 21 ans d'expérience disponible pour vous guider et vous proposer des solutions adaptées à vos besoins.");
   // function de creation et de remplissage des elements des tab du tabfolder
   function createAndPopulateTab(whichTab,imageInsideEachTab,titleInsideEachTab,textInsideEachTab){
     const scrollViewInsideTabFolder = new ScrollView({left: 0,right: 0,top: 0,bottom:50}).appendTo(whichTab);
-    const imgTab = new ImageView({centerX:0,scaleMode:'fit',width:200,height:200,top:"1%",image:imageInsideEachTab}).appendTo(scrollViewInsideTabFolder);
-    const titleInsideTab = new TextView({left:25,right:25,top:["prev()", 20],text:titleInsideEachTab,font:"20px roboto,noto",textColor:"#fff",markupEnabled:true}).appendTo(scrollViewInsideTabFolder);
+    const imgTab = new ImageView({centerX:0,scaleMode:'fit',width:320,height:320,top:"0%",image:imageInsideEachTab}).appendTo(scrollViewInsideTabFolder);
+    const titleInsideTab = new TextView({left:25,right:25,top:["prev()", 15],text:titleInsideEachTab,font:"20px roboto,noto",textColor:"#fff",markupEnabled:true}).appendTo(scrollViewInsideTabFolder);
     const textTab = new TextView({left:25,right:25,top:["prev()", 5],text:textInsideEachTab,font:font16px,textColor:"#fff",markupEnabled:true}).appendTo(scrollViewInsideTabFolder);
   }
   // gestion du slider
