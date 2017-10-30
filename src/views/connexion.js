@@ -31,7 +31,7 @@ exports.create = () =>{
       }else{
          let objectConnection = {identifiant:loginValue,password:passwordValue,requestName:'Connection'};
              objectConnection = JSON.stringify(objectConnection);
-        //  pDialog("Connexion en cours...",false,true);
+         pDialog("Connexion en cours...",false,true);
          const connectionAjax = require("../modules/ajax.js")(objectConnection,"https://www.afrikhealth.com/apiAssuranceLmr/apiConnection.php");
                connectionAjax.then((response)=>{
                  pDialog("",true,false);
