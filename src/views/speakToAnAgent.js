@@ -11,6 +11,27 @@ module.exports = (navigationViewToInsert)=>{
   const font14px ="14px roboto, noto";
   const userInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
   const userNotifications = JSON.parse(localStorage.getItem('notifications'));
+  const itemsOfActionSheet = [
+    {title: "Responsabilité civile chef d'entreprise"},
+    {title:"Tous risques informatique"},
+    {title: "Maladie"},
+    {title: "Multirisque habitations et/ou bureaux"},
+    {title: "Habitation"},
+    {title: "Incendie et perte d'exploitation"},
+    {title: "Individuelle accident"},
+    {title: "Tous risques chantier"},
+    {title: "Vie et capitalisation"},
+    {title: "Bris de machine"},
+    {title: "Vol en coffre-fort"},
+    {title: "Transport des fonds"},
+    {title: "Voyage ou maladie internationale"},
+    {title: "Automobile"},
+    {title: "Prevoyance retraite"},
+    {title: "Contrat indemnités de fin de carriere(IFC)"},
+    {title: "Visa études plus"},
+    {title: "Assistance frais funérailles"},
+    {title: "Bancassurance"}
+  ];
   const speakToAnAgentView = new Page({title: `Parler à un agent`,background:`#fafafa`})
   .on({
     appear: ()=>{
@@ -27,7 +48,7 @@ module.exports = (navigationViewToInsert)=>{
   const scrollViewComposite = new ScrollView({top:0,left:0,right:0,bottom:0}).appendTo(compositeAreaTypeMessage);
   const inputMessage = new TextInput({left:5,right:5,centerY:0,message:"Entrez votre question",font:font14px,textColor:"#757575",autoCorrect:true,backgroundImage:null,focused:true,type:'multiline'}).appendTo(scrollViewComposite);
   handleActionCategorie.on("select",()=>{
-    let as = actionSheet();
+    let as = actionSheet("Choisissez un categorie d'assurance",itemsOfActionSheet);
     as.then((returnAs)=>{
      categoryAssuranceSelected = returnAs;
     });

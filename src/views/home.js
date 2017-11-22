@@ -4,15 +4,37 @@ exports.create = () => {
     const {Page,TextView,Composite,ImageView,CollectionView,ui,ScrollView,SearchAction} = require('tabris');
     ui.contentView.background = '#fff';
     let createnavigationView;
+    const itemsOfActionSheet = [
+        {title: "Responsabilité civile chef d'entreprise"},
+        {title:"Tous risques informatique"},
+        {title: "Maladie"},
+        {title: "Multirisque habitations et/ou bureaux"},
+        {title: "Habitation"},
+        {title: "Incendie et perte d'exploitation"},
+        {title: "Individuelle accident"},
+        {title: "Tous risques chantier"},
+        {title: "Vie et capitalisation"},
+        {title: "Bris de machine"},
+        {title: "Vol en coffre-fort"},
+        {title: "Transport des fonds"},
+        {title: "Voyage ou maladie internationale"},
+        {title: "Automobile"},
+        {title: "Prevoyance retraite"},
+        {title: "Contrat indemnités de fin de carriere(IFC)"},
+        {title: "Visa études plus"},
+        {title: "Assistance frais funérailles"},
+        {title: "Bancassurance"}
+      ];
     const executeNavigationView = require("../helpers/navigationViewAnimation.js")(createnavigationView, false);
           executeNavigationView.drawerActionVisible = true;
+          executeNavigationView.font = "12px roboto,noto";
     const objectUserInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
     let createMenuActionIcon;
     const actionSheetHome = require('../helpers/actionSheet.js');
     const alertDialog = require('../helpers/alertDialog.js');
     let handleActionCategorie = require("../helpers/actionIcons.js")(createMenuActionIcon, "Voir toutes les catégories d'assurances", "srcImg", "low", executeNavigationView);
         handleActionCategorie.on("select",()=>{
-            let as = actionSheetHome();
+            let as = actionSheetHome("Choisissez un categorie d'assurance",itemsOfActionSheet);
                 as.then((returnAs)=>{
                 let t = homeView.find('.compositeCard');
                 let i = t.length;
@@ -31,7 +53,7 @@ exports.create = () => {
     let searchAction = new SearchAction({message:"Entrez une categorie d'assurance",image: {src:'src/icons/search.png',scale:1.5}})
     .on({
      select:()=>{
-      handleActionCategorie.visible = false;
+    //   handleActionCategorie.visible = false;
      },
      accept:({text})=>{
         let t = homeView.find('.compositeCard');
@@ -59,14 +81,14 @@ exports.create = () => {
             }
          }
         }
-      handleActionCategorie.visible = true;
+    //   handleActionCategorie.visible = true;
      }
     }).appendTo(executeNavigationView);
     let drawer = ui.drawer;
     drawer.enabled = true;
     drawer.background = "#fff";
     // const PROPOSALS = ['RESPONSABILITE CIVILE CHEF D’ENTREPRISE', 'ASSURANCE TOUS RISQUES INFORMATIQUE', 'ASSURANCE MALADIE', 'ASSURANCE HABITATION', 'ASSURANCE  INCENDIE  ET  PERTE  D’EXPLOITATION', 'ASSURANCE  INDIVIDUELLE  ACCIDENT','TOUS  RISQUES  CHANTIER',' ASSURANCE  VIE  ET  CAPITALISATION ','ASSURANCE  BRIS  DE  MACHINE','VOL EN COFFRE FORT','TRANSPORT DES FONDS','VOYAGE OU MALADIE INTERNATIONALE','ASSURANCE AUTOMOBILE','ASSURANCE PREVOYANCE RETRAITE','CONTRAT INDEMNITES DE FIN DE CARRIERE (IFC)','VISA ETUDE PLUS','ASSURANCE ASSISTANCE FRAIS FUNERAILLES','BANCASSURANCE'];
-    let homeView = new Page({title: `M. ASSURANCES`,background: `#fafafa`,
+    let homeView = new Page({title: `M. ASSURANCES`,background: `#fafafa`
     }).on({
         appear: () => {
          searchAction.visible = true;
@@ -91,7 +113,7 @@ exports.create = () => {
     // Creation de la collectionView du drawer 
     const itemConfig = [
         {
-            title: "Demander un devis",
+            title: "Demander un devis automobile",
             image: "src/icons/new-insurance.png"
      },
         {
@@ -147,7 +169,7 @@ exports.create = () => {
     }) => {
         let itemIndex = itemConfig[index];
         drawer.close();
-        if(itemIndex.title === "Demander un devis"){
+        if(itemIndex.title === "Demander un devis automobile"){
          require("./createDevis.js").create().appendTo(executeNavigationView);
         }else if(itemIndex.title === "Poser une question à un agent"){
          require('./speakToAnAgent.js')(executeNavigationView).appendTo(executeNavigationView);

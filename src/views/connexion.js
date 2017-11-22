@@ -25,7 +25,7 @@ exports.create = () =>{
       const regexNumber = /^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$/;
       const verifFirstDigit = loginValue.charAt(0);
       if(loginValue === "" || passwordValue === ""){
-         messageInfo(connexionView,40,"Veuillez remplir tout les champs");  
+        messageInfo(connexionView,40,"Veuillez remplir tout les champs");  
       }else if(!regexNumber.test(loginValue) || verifFirstDigit !== "6" || loginValue.length !== 9){
         messageInfo(connexionView,40,"Veuillez entrer un numéro de telephone valide");
       }else{

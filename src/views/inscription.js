@@ -1,6 +1,6 @@
 exports.create = () =>{ 
  "use strict";
- const {Page,ScrollView,TextInput,Button,Composite,TextView} = require('tabris');
+ const {Page,ScrollView,TextInput,Button,Composite,TextView,CheckBox} = require('tabris');
  let labelAnim = require('../helpers/animateLabel.js');
  let messageInfo = require('../custom_widgets/snackbar.js');
  const themeColor = "#1562AD";

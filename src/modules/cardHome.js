@@ -19,7 +19,7 @@ module.exports = (widgetToAppend,navigationViewToImport)=>{
                 compositeCard.title = title;
                 compositeCard.fullQuestions = response[i].Questions;
                 compositeCard.fullResponses = response[i].Reponses;
-          const imageCard = new ImageView({left:0,right:0,top:0,height:250,image:{src:img},scaleMode:"fill",}).appendTo(compositeCard);
+          const imageCard = new ImageView({left:0,right:0,top:0,height:250,image:{src:img},scaleMode:"stretch",}).appendTo(compositeCard);
           const titreRubrique =  new TextView({top:['prev()',10],left:10,right:10,font:'16px roboto,noto',maxLines:1,text:title.toUpperCase(),textColor:'#212121'}).appendTo(compositeCard);
           const apercuTextRubrique = new TextView({top:['prev()',3],left:10,right:10,maxLines:4,textColor:'#757575',font:'14px roboto,noto',text:response[i].Reponses[0],markupEnabled:true}).appendTo(compositeCard);
           const share = new TextView({bottom:12,left:15,text:'PARTAGER',font:font14px,textColor:'#757575'}).appendTo(compositeCard);
