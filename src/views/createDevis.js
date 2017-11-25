@@ -180,7 +180,7 @@ exports.create =()=>{
          if(["Bris de Glaces", "Incendie", "Vol"].includes(this.text)){
            if(labelValeurVenale === undefined){
              labelValeurVenale = new TextView({top:["#vol", 10],left:"10%",right:"10%",text:"VALEUR VENALE"}).appendTo(scrollView);
-             inputValeurVenale = new TextInput({layoutData:{top:["prev()",0],left:"10%",right:"10%"},font: font14px,message: "Entrez la valeur vénale",borderColor:"#e0e0e0",keyboard:'number'}).appendTo(scrollView);
+             inputValeurVenale = new TextInput({layoutData:{top:["prev()",0],left:"10%",right:"10%"},font: font14px,message: "Entrez la valeur vénale du véhicule",borderColor:"#e0e0e0",keyboard:'number'}).appendTo(scrollView);
              button.top = ["prev()", 80];
             }
          }

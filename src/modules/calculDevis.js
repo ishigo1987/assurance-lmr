@@ -169,6 +169,9 @@ module.exports = (devisData)=>{
       let netPrime;
       let defenseRecours = 0;
       let avanceRecours = 0;
+      let brisGlace = 0;
+      let incendie = 0;
+      let vol = 0;
       let resultRc = outputDevisPrice();
       if(devisData.arrayOfCheckBox.includes("Defense Recours") === true){
         defenseRecours = Math.round(Number((resultRc * 25) / 1000));
@@ -176,7 +179,16 @@ module.exports = (devisData)=>{
       if(devisData.arrayOfCheckBox.includes("Avance sur Recours") === true){
         avanceRecours = 30000;
       }
-      netPrime = resultRc + defenseRecours + avanceRecours;
+      if(devisData.arrayOfCheckBox.includes("Bris de Glaces") === true){
+        brisGlace = Math.round(Number((2.5 *(20 * devisData.valeurVenale) / 100) / 100));
+      }
+      if(devisData.arrayOfCheckBox.includes("Incendie") === true){
+        incendie = Math.round(Number((0.25 * devisData.valeurVenale) / 100));
+      }
+      if(devisData.arrayOfCheckBox.includes("Vol") === true){
+        vol = Math.round(Number(devisData.valeurVenale / 100));
+      }
+      netPrime = resultRc + defenseRecours + avanceRecours + brisGlace + incendie + vol;
       resolve(netPrime);
      }else{
       // Calcul avec la fonction de calcul du devis en fonction du nombre de mois
@@ -198,8 +210,6 @@ module.exports = (devisData)=>{
       }else if(dureeJour > 365){
         rc = Math.round(Number((rca * 100) / 100));
       }
-
-      // resolve(rc);
       return rc;
     }
 

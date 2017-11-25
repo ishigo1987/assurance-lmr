@@ -50,7 +50,7 @@ exports.create = () => {
                
             });
         });
-    let searchAction = new SearchAction({message:"Entrez une categorie d'assurance",image: {src:'src/icons/search.png',scale:1.5}})
+    let searchAction = new SearchAction({message:"Entrez une categorie d'assurance",image: {src:'src/icons/searchLmr.png',scale:1.5}})
     .on({
      select:()=>{
     //   handleActionCategorie.visible = false;
