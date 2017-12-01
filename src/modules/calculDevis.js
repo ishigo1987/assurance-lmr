@@ -1,6 +1,5 @@
 module.exports = (devisData)=>{
   "use strict";
-  console.log(devisData);
   return new Promise((resolve,reject)=>{
       const category = devisData.category;
       const zone = devisData.zone;

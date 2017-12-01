@@ -6,7 +6,7 @@ exports.create = ()=>{
   const font14px ="14px roboto, noto";
   let valueCheckOrNotPushNotification, valueCheckOrNotMessage;
   if(localStorage.getItem('notifications') === null){
-    valueCheckOrNotPushNotification = false;
+    valueCheckOrNotPushNotification = true;
     valueCheckOrNotMessage = false;
   }else{
     let valueLocalStorageNotifications = localStorage.getItem('notifications');

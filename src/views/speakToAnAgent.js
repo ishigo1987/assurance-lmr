@@ -9,8 +9,9 @@ module.exports = (navigationViewToInsert)=>{
   const sendMessage = require('../helpers/actionIcons.js')(createMenuActionIcon,"","src/icons/sendMessage.png","high",navigationViewToInsert);
   const themeColor = "#1562AD";
   const font14px ="14px roboto, noto";
+  let infoAboutNewQuestionToSend;
   const userInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
-  const userNotifications = JSON.parse(localStorage.getItem('notifications'));
+  let userNotifications = JSON.parse(localStorage.getItem('notifications'));
   const itemsOfActionSheet = [
     {title: "Responsabilité civile chef d'entreprise"},
     {title:"Tous risques informatique"},
@@ -47,6 +48,11 @@ module.exports = (navigationViewToInsert)=>{
   const compositeAreaTypeMessage = new Composite({top:['prev()',0],left:0,right:0,bottom:0,background:"#eee"}).appendTo(speakToAnAgentView);
   const scrollViewComposite = new ScrollView({top:0,left:0,right:0,bottom:0}).appendTo(compositeAreaTypeMessage);
   const inputMessage = new TextInput({left:5,right:5,centerY:0,message:"Entrez votre question",font:font14px,textColor:"#757575",autoCorrect:true,backgroundImage:null,focused:true,type:'multiline'}).appendTo(scrollViewComposite);
+  if(localStorage.getItem('NotAskAQuestionBefore') === null){
+     infoAboutNewQuestionToSend = new TextView({centerY:0,left:"10%",right:"10%",textColor:"#616161",alignment:"center",text:"Vous n'avez pas encore posé de question a notre agent, si vous en avez une ecrivez la dans la zone située en bas de cette page"}).appendTo(scrollView);
+  }else{
+    // fetch request to retrieve the questions and answers
+  }
   handleActionCategorie.on("select",()=>{
     let as = actionSheet("Choisissez un categorie d'assurance",itemsOfActionSheet);
     as.then((returnAs)=>{
@@ -54,29 +60,36 @@ module.exports = (navigationViewToInsert)=>{
     });
   });
   sendMessage.on('select',()=>{
-     let inputMessageValue = inputMessage.text;
-     if(inputMessageValue === ""){
-      messageInfo(speakToAnAgentView,40,"Veuillez remplir le champ de question");
-     }else if(categoryAssuranceSelected === undefined){
-      messageInfo(speakToAnAgentView,40,"Veuillez choisir une catégorie d'assurances");
-     }else{
-      //  let dataToSend;
-      // // Ici on verifie si l'utilisateur a choisi qu'on lui envoi la reponse a sa question par message
-      // // Dans ce cas on envoi son numéro a l'agent lors de l'envoi de son message
-      // if(userNotifications.Message === "On"){
-      //   dataToSend = {Id:userInformations.Id,Telephone:userInformations.Telephone,Question:inputMessagValue}
-      // }else{
-      //   dataToSend = {Id:userInformations.Id,Question:inputMessagValue}
-      // }
-      // const ajax = require('../modules/ajax.js')(JSON.stringify(dataToSend),"https://www.afrikhealth.com/apiAssuranceLmr/apiConnection.php");
-      //       ajax.then((response)=>{
-
-      //       }).catch(()=>{
-
-      //       });
-      let aD = alertDialog("Messaye envoyé","Votre message a bien été envoyé un agent vous répondra dans un delai de 24h maximum","Ok merci","Fermer");
-      inputMessage.text = "";
-      
+    let dataToSend = {};
+    let inputMessageValue = inputMessage.text;
+    if(inputMessageValue === ""){
+     messageInfo(speakToAnAgentView,40,"Veuillez remplir le champ de question");
+    }else if(categoryAssuranceSelected === undefined){
+     messageInfo(speakToAnAgentView,40,"Veuillez choisir une catégorie d'assurances");
+    }else{
+      if(userNotifications === null){
+        dataToSend.NotificationMessage = String(false);
+      }else{
+       dataToSend.NotificationMessage = String(userNotifications.NotificationsMessage);
+      }
+      dataToSend.Id = String(userInformations.Id);
+      dataToSend.QuestionCategory = categoryAssuranceSelected;
+      dataToSend.Question = inputMessageValue;
+      dataToSend.requestName = "Poser une question a un agent";
+      const ajax = require('../modules/ajax.js')(JSON.stringify(dataToSend),"https://www.afrikhealth.com/apiAssuranceLmr/apiHome.php");
+            ajax.then((response)=>{
+              if(response.Message === "Question envoyée"){
+                localStorage.setItem('NotAskAQuestionBefore','Une question a déja été posée');
+                if(infoAboutNewQuestionToSend !== undefined){
+                  infoAboutNewQuestionToSend.dispose();
+                }
+                let aD = alertDialog("Messaye envoyé","Votre message a bien été envoyé un agent vous répondra dans un delai de 24h maximum","Ok merci","Fermer");
+                inputMessage.text = "";
+                categoryAssuranceSelected = undefined;
+              }
+            }).catch((error)=>{
+              console.log(error);
+            });
      }
   });
   return speakToAnAgentView;
