@@ -1,5 +1,6 @@
 module.exports = (navigationViewToInsert)=>{
   "use strict";
+  localStorage.setItem('activePage','speakToAgent');
   const {Page,ScrollView,TextInput,Composite,TextView} = require('tabris');
   let createMenuActionIcon,categoryAssuranceSelected;
   const actionSheet = require('../helpers/actionSheet.js');
@@ -42,6 +43,7 @@ module.exports = (navigationViewToInsert)=>{
     disappear: ()=>{
       handleActionCategorie.visible = false;
       sendMessage.visible = false;
+      localStorage.removeItem('activePage');
     }
   });
   const scrollView = new ScrollView({top:0,left:0,right:0,bottom:70}).appendTo(speakToAnAgentView);
@@ -72,7 +74,7 @@ module.exports = (navigationViewToInsert)=>{
       }else{
        dataToSend.NotificationMessage = String(userNotifications.NotificationsMessage);
       }
-      dataToSend.Id = String(userInformations.Id);
+      dataToSend.Telephone = String(userInformations.Telephone);
       dataToSend.QuestionCategory = categoryAssuranceSelected;
       dataToSend.Question = inputMessageValue;
       dataToSend.requestName = "Poser une question a un agent";
