@@ -17,7 +17,7 @@ module.exports = (navigationViewToInsert)=>{
                         badge:true,
                         smallIcon:'res://android/ldpi.png'
                     });
-                    function openSpeakToAnAgentPage(){console.log('you');}
+                    function openSpeakToAnAgentPage(e){console.log(e);}
                     cordova.plugins.notification.local.on('click', openSpeakToAnAgentPage);
                 });
                }
