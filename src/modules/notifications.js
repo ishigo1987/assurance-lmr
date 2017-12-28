@@ -1,4 +1,4 @@
-module.exports = ()=>{
+module.exports = (navigationViewToInsert)=>{
  const ajaxGetNewResponse = require('./ajax.js');
  const userInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
  let dataToSend = {requestName:'Recuperer la réponse de LMR',userNumber:userInformations.Telephone};
@@ -17,7 +17,7 @@ module.exports = ()=>{
                         badge:true,
                         smallIcon:'res://android/ldpi.png'
                     });
-                    function openSpeakToAnAgentPage(){require('./speakToAnAgent.js')(executeNavigationView).appendTo(executeNavigationView);}
+                    function openSpeakToAnAgentPage(){require('./speakToAnAgent.js')(navigationViewToInsert).appendTo(navigationViewToInsert);}
                     cordova.plugins.notification.local.on('click', openSpeakToAnAgentPage);
                 });
                }
