@@ -17,9 +17,8 @@ module.exports = (navigationViewToInsert)=>{
                         badge:true,
                         smallIcon:'res://android/ldpi.png'
                     });
-                    function openSpeakToAnAgentPage(notification,state){if (debugSetUpLocalNotificationHandlers)
-                        ConsoleLog("SetUpLocalNotificationHandlers: 'click' " + notification.id + "state = " + JSON.stringify(state));}
-                    cordova.plugins.notification.local.on('click', openSpeakToAnAgentPage,navigationViewToInsert);
+                    function openSpeakToAnAgentPage(){console.log('you le brave');}
+                    cordova.plugins.notification.local.on('click', openSpeakToAnAgentPage);
                 });
                }
            }
