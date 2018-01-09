@@ -85,16 +85,22 @@ module.exports = (navigationViewToInsert)=>{
                 if(infoAboutNewQuestionToSend !== undefined){
                   infoAboutNewQuestionToSend.dispose();
                 }
-                const aD = alertDialog("Question envoyée","Votre question a bien été envoyée, un agent vous répondra dans un delai de 24h maximum","Ok merci","Fermer");
+                const aD = alertDialog("Question envoyée","Votre question a bien été envoyée, un agent vous répondra dans un delai de 24h maximum.","Ok merci","Fermer");
                 inputMessage.text = "";
                 categoryAssuranceSelected = undefined;
               }else if(response.Message === "Question attendant une réponse"){
-                const aD = alertDialog("Question non envoyée",`${response.Question}`,"Ok j'ai compris");
+                const aD = alertDialog("Question non envoyée",`${response.Question}`,"Ok j'ai compris","");
               }
             }).catch((error)=>{
               console.log(error);
             });
      }
   });
+
+  // Fonction qui récupére les questions posées et les réponses recues du serveur
+  function retrieveMessageFromServer(){
+    const ajax = require('../modules/ajax.js')(JSON.stringify(dataToSend),"https://www.afrikhealth.com/apiAssuranceLmr/apiHome.php");
+  }
+  retrieveMessageFromServer();
   return speakToAnAgentView;
 };

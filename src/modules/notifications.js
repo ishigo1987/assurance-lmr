@@ -14,12 +14,10 @@ module.exports = (navigationViewToInsert)=>{
                         title: 'Réponse de Msr Assurance',
                         text: response.ReponseLmr,
                         foreground: true,
-                        badge:true,
                         smallIcon:'res://android/ldpi.png'
                     });
                     function openSpeakToAnAgentPage(){
                      console.log('you le brave');
-                     cordova.plugins.notification.local.schedule.badge = false;
                     }
                     cordova.plugins.notification.local.on('click', openSpeakToAnAgentPage);
                 });
