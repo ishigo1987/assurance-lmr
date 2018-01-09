@@ -85,9 +85,11 @@ module.exports = (navigationViewToInsert)=>{
                 if(infoAboutNewQuestionToSend !== undefined){
                   infoAboutNewQuestionToSend.dispose();
                 }
-                let aD = alertDialog("Messaye envoyé","Votre message a bien été envoyé un agent vous répondra dans un delai de 24h maximum","Ok merci","Fermer");
+                const aD = alertDialog("Question envoyée","Votre question a bien été envoyée, un agent vous répondra dans un delai de 24h maximum","Ok merci","Fermer");
                 inputMessage.text = "";
                 categoryAssuranceSelected = undefined;
+              }else if(response.Message === "Question attendant une réponse"){
+                const aD = alertDialog("Question non envoyée",`${response.Question}`,"Ok j'ai compris");
               }
             }).catch((error)=>{
               console.log(error);

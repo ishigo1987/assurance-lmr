@@ -9,7 +9,7 @@ module.exports = (navigationViewToInsert)=>{
            // Notification pour avertir l'utilisateur d'une réponse a sa question
            if(response.Statut === "Réponse envoyée"){
             if(localStorage.getItem('activePage') === null){
-                cordova.plugins.notification.local.hasPermission(function (granted) {
+                cordova.plugins.notification.local.hasPermission((granted)=>{
                     cordova.plugins.notification.local.schedule({
                         title: 'Réponse de Msr Assurance',
                         text: response.ReponseLmr,
@@ -17,7 +17,10 @@ module.exports = (navigationViewToInsert)=>{
                         badge:true,
                         smallIcon:'res://android/ldpi.png'
                     });
-                    function openSpeakToAnAgentPage(){console.log('you le brave');}
+                    function openSpeakToAnAgentPage(){
+                     console.log('you le brave');
+                     cordova.plugins.notification.local.schedule.badge = false;
+                    }
                     cordova.plugins.notification.local.on('click', openSpeakToAnAgentPage);
                 });
                }
