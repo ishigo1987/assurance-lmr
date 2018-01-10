@@ -53,7 +53,8 @@ module.exports = (navigationViewToInsert)=>{
   if(localStorage.getItem('NotAskAQuestionBefore') === null){
      infoAboutNewQuestionToSend = new TextView({centerY:0,left:"10%",right:"10%",textColor:"#616161",alignment:"center",text:"Vous n'avez pas encore posé de question a notre agent, si vous en avez une ecrivez la dans la zone située en bas de cette page"}).appendTo(scrollView);
   }else{
-    // fetch request to retrieve the questions and answers
+    // Ajax request to retrieve the questions and answers
+    retrieveMessageFromServer();
   }
   handleActionCategorie.on("select",()=>{
     let as = actionSheet("Choisissez un categorie d'assurance",itemsOfActionSheet);
@@ -99,8 +100,13 @@ module.exports = (navigationViewToInsert)=>{
 
   // Fonction qui récupére les questions posées et les réponses recues du serveur
   function retrieveMessageFromServer(){
+    const dataToSend = {Telephone:String(userInformations.Telephone),requestName:"Récuperer les questions et les réponses"};
     const ajax = require('../modules/ajax.js')(JSON.stringify(dataToSend),"https://www.afrikhealth.com/apiAssuranceLmr/apiHome.php");
+          ajax.then((response)=>{
+           console.log(response);
+          }).catch((error)=>{
+           console.log(error);
+          })
   }
-  retrieveMessageFromServer();
   return speakToAnAgentView;
 };

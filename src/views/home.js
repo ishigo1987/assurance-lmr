@@ -130,6 +130,10 @@ exports.create = () => {
             image: "src/icons/about-us.png"
         },
         {
+            title: "Foire aux questions",
+            image: "src/icons/faq.png"
+        },
+        {
             title: "Déconnexion",
             image: "src/icons/logout.png"
      }];
@@ -178,6 +182,8 @@ exports.create = () => {
          require('./settings.js')(executeNavigationView).appendTo(executeNavigationView);
         }else if(itemIndex.title === "A propos de nous"){
          require('./aboutUs.js').create().appendTo(executeNavigationView);
+        }else if(itemIndex.title === "Foire aux questions"){
+         require('./faq.js').create().appendTo(executeNavigationView);
         }else if(itemIndex.title === "Déconnexion") {
          executeNavigationView.visible = false;
          executeNavigationView.dispose();
