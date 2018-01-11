@@ -22,6 +22,7 @@ exports.create = () =>{
            localStorage.setItem('userInfos', JSON.stringify(dataToSend));
            let callModuleSendCode = require('../modules/sendVerificationCode.js')(phoneInputValue);
                callModuleSendCode.then((response)=>{
+                   console.log(response);
                 if(response.Message === "Code envoye"){
                   // je crée ce localStorage pour signifier a la vue de verification du numéro de téléphone que je veux etre redirigé 
                   //vers la vue entrer un nouveau mot de passe
