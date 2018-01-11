@@ -14,6 +14,7 @@ module.exports = (navigationViewToInsert)=>{
                         title: 'Réponse de Msr Assurance',
                         text: response.ReponseLmr,
                         foreground: true,
+                        badge:false,
                         smallIcon:'res://android/ldpi.png'
                     });
                     function openSpeakToAnAgentPage(){

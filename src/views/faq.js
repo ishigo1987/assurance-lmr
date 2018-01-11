@@ -21,8 +21,9 @@ exports.create =()=>{
                     view.find("#textViewQuestion").set("text", page.Question);
                     view.find("#textViewReponse").set("text", page.Reponse);
                 }
-            }).appendTo(faqPage);
+            }).appendTo(scrollView);
           }).catch((error)=>{
 
           });
+  return faqPage
 }
