@@ -18,6 +18,7 @@ exports.create = () =>{
         }else if(!regexNumber.test(phoneInputValue) || verifFirstDigit !== "6" || phoneInputValue.length !== 9){
             messageInfo(enterPhoneNumberView,40,"Veuillez entrer un numéro de téléphone valide");
         }else{
+           console.log(phoneInputValue);
            const dataToSend = {phoneNumber: phoneInputValue};
            localStorage.setItem('userInfos', JSON.stringify(dataToSend));
            let callModuleSendCode = require('../modules/sendVerificationCode.js')(phoneInputValue);

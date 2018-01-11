@@ -15,11 +15,13 @@ module.exports = (phoneToSendCode) =>{
     });
     xhr.addEventListener("load", () =>{
     //  let xhrResponse = JSON.parse(xhr.responseText);
+    console.log(xhr.responseText);
      pDialog("",true,false);
      resolve(xhr.responseText);
     });
     xhr.addEventListener("error", () =>{
       pDialog("",true,false);
+      console.log("pb avec json");
       reject("Pas de connexion internet");
     });
     xhr.responseType = "text";
