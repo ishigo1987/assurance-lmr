@@ -14,14 +14,12 @@ module.exports = (phoneToSendCode) =>{
       pDialog("Envoi d'un code de vérification en cours...",false,true);
     });
     xhr.addEventListener("load", () =>{
-    //  let xhrResponse = JSON.parse(xhr.responseText);
-    console.log(xhr.responseText);
+     let xhrResponse = JSON.parse(xhr.responseText);
      pDialog("",true,false);
-     resolve(xhr.responseText);
+     resolve(xhrResponse);
     });
     xhr.addEventListener("error", () =>{
       pDialog("",true,false);
-      console.log("pb avec json");
       reject("Pas de connexion internet");
     });
     xhr.responseType = "text";
