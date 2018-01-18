@@ -23,14 +23,15 @@ exports.create = () =>{
           phoneUser = phoneUser.telephone;
       let dataToSend = {telephone:phoneUser,password:passwordInputValue, requestName:"UpdatePassword"};
           dataToSend = JSON.stringify(dataToSend);
+          console.log(dataToSend);
       pDialog("Mise a jour de votre mot de passe.",false,true);
       const updatePassword = require("../modules/ajax.js")(dataToSend, 'https://www.afrikhealth.com/apiAssuranceLmr/apiConnection.php');
             updatePassword.then((response)=>{
                pDialog("",true,false);
              if(response.Message === 'Mot de passe mis a jour'){
-                window.plugins.toast.showLongBottom("Votre mot de passe a été mis a jour");
+                messageInfo(pageNewPasswordView,40,"Votre mot de passe a été mis a jour");
              }else if(response.Message === "Cet utilisateur n'est pas dans la Bd"){
-                window.plugins.toast.showLongBottom("Ce numéro n'existe pas dans notre systeme, veuillez vous inscrire");
+                messageInfo(pageNewPasswordView,80,"Ce numéro n'existe pas dans notre systeme, veuillez vous inscrire");  
              }
              executeNavigationViewPassword.visible = false;
              executeNavigationViewPassword.dispose();
@@ -38,7 +39,7 @@ exports.create = () =>{
                  connexionView.create();
             }).catch(()=>{
                pDialog("",true,false);
-              messageInfo(pageNewPasswordView,80,"Impossible de traiter la demande veuillez réssayer");
+               messageInfo(pageNewPasswordView,80,"Impossible de traiter la demande veuillez réssayer");
             });
     }
  }).appendTo(pageNewPasswordView);

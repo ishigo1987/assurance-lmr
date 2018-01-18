@@ -8,6 +8,7 @@ module.exports = (devisData)=>{
       const energy = devisData.energy;
       let puissance = devisData.puissance;
       const remorque = devisData.remorque;
+      const dtaChecked = devisData.dta;
       let rca;
       if(category === "Catégorie 1"){
         // Test de Zone
@@ -188,7 +189,7 @@ module.exports = (devisData)=>{
         vol = Math.round(Number(devisData.valeurVenale / 100));
       }
       netPrime = resultRc + defenseRecours + avanceRecours + brisGlace + incendie + vol;
-      resolve(netPrime);
+      renderTtcPrime(netPrime);
      }else{
       // Calcul avec la fonction de calcul du devis en fonction du nombre de mois
      }
@@ -211,6 +212,46 @@ module.exports = (devisData)=>{
       }
       return rc;
     }
-
+    function renderTtcPrime(netPrimeValue){
+      let ttcPrime;
+      let accessoriesPrice;
+      let tvaValue;
+      let pinkCard;
+      let centralFile;
+      let dta;
+      // On trouve la valeur des frais accessoires
+      if(netPrimeValue >= 1 && netPrimeValue <= 100000){
+        accessoriesPrice = Number(2500);
+      }else if(netPrimeValue >= 100001 && netPrimeValue <= 500000){
+        accessoriesPrice = Number(5000);
+      }else if(netPrimeValue >= 500001 && netPrimeValue <= 1000000){
+        accessoriesPrice = Number(10000);
+      }else if(netPrimeValue >= 1000000){
+        accessoriesPrice = Number(20000);
+      }
+      // On trouve la valeur de la Tva
+      tvaValue = Number((netPrimeValue + accessoriesPrice + 250) * 0.1925);
+      // On trouve la valeur de la carte rose
+      pinkCard = 1000;
+      // On trouve la valeur du fichier central
+      centralFile = 250;
+      // On trouve la valeur de la Dta si l'utilisateur a checké la Dta
+      if(dtaChecked === "Non"){
+        dta = Number(0);
+      }else{
+        if(puissance >= 2 && puissance <= 7){
+          dta = Number(15000);
+        }else if(puissance >= 8 && puissance <= 13){
+          dta = Number(25000);
+        }else if(puissance >= 14 && puissance <= 20){
+          dta = Number(50000);
+        }else if(puissance > 20){
+          dta = Number(100000);
+        }
+      }
+      // On calcule la prime Ttc
+      ttcPrime = Number(netPrimeValue + accessoriesPrice + tvaValue + pinkCard + centralFile + dta);
+      resolve(ttcPrime);
+    }
   });
 }

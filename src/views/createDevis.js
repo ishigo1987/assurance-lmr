@@ -155,7 +155,9 @@ exports.create =()=>{
  const avecRemorque = new RadioButton({top:["#labelRemorque", 5],left:["prev()",5],text:"Avec",font:'14px roboto,noto',checkedTintColor:themeColor,visible:false}).appendTo(scrollView);
  const inflammableRemorque = new RadioButton({top:["#labelRemorque", 5],left:["prev()",5],text:"Matière inflammable",font:'14px roboto,noto',checkedTintColor:themeColor,visible:false}).appendTo(scrollView);
  const labelDuree = new TextView({top:["#labelRemorque", 20],left:"10%",text:"DURÉE",textColor:"#212121",font:"16px roboto, noto",id:'LabelDuree'}).appendTo(scrollView);
- const duree = new TextInput({layoutData:{top:["prev()",0],left:"10%",right:"10%"},font: font14px,message: "Durée en jours",borderColor:"#e0e0e0",class:'animLabel',id:'duree',keyboard:'number'}).appendTo(scrollView);
+ const duree = new TextInput({layoutData:{top:["prev()",0],left:"10%",right:"10%"},font: font14px,message: "Durée en jours",borderColor:"#e0e0e0",id:'duree',keyboard:'number'}).appendTo(scrollView);
+ const labelDta = new TextView({top:["prev()", 10],left:"10%",text:"DROIT DE TIMBRE AUTOMOBILE",textColor:"#212121",font:"16px roboto, noto",id:'LabelDta'}).appendTo(scrollView);
+ const switchDta = new Switch({top:["#duree",10],left:["#LabelDta",30],checked:false,thumbOnColor:themeColor,trackOnColor:"#a1c0de"}).appendTo(scrollView);
  const labelGuaranties = new TextView({top:["prev()",10],left:"10%",text:"GARANTIES"}).appendTo(scrollView);
  const defenseRecours = new CheckBox({top:["prev()",10],left:"10%",text:"Defense Recours",class:"checkBox"}).appendTo(scrollView);
  const avanceRecours = new CheckBox({top:["prev()",10],left:"10%",text:"Avance sur Recours",class:"checkBox"}).appendTo(scrollView);
@@ -218,6 +220,13 @@ exports.create =()=>{
   //   messageInfo(createDevisView,40,"Veuillez entrer un nombre de places");
   // }
   else{
+    let dtaValue = switchDta.checked;
+    if(dtaValue === false){
+     dtaValue = "Non";
+    }else{
+     dtaValue = "Oui";
+    }
+    objectOfValueToSend.dta = dtaValue;
     objectOfValueToSend.category = categoryValue;
     objectOfValueToSend.zone = zoneValue;
     // On verifie si c'est la catégorie 1 dans ce cas on prend la valeur de remorque(oui ou non)
@@ -292,7 +301,7 @@ exports.create =()=>{
     console.log(objectOfValueToSend);
     const returnCalculDevis = calculDevis(objectOfValueToSend);
           returnCalculDevis.then((result)=>{
-           let aD = alertDialog("Résultat",`Votre prime nette s'élève à ${result} Fcfa`,"","Fermer");
+           let aD = alertDialog("Résultat",`Votre prime Ttc s'élève à ${result} Fcfa`,"","Fermer");
           }).catch((e)=>{
            console.log(e);
           }); 
