@@ -13,7 +13,10 @@ exports.create = () =>{
    const phoneUser = userInfos.phoneNumber;
    userInfos = JSON.stringify(userInfos);
    const layoutDataHelper = {top:["prev()", 30],left:"10%",right:"10%"};
-   const pageVerifNumberView = new Page({title: `Verification de votre numéro de téléphone`, background:`#fafafa`}).appendTo(executeNavigationView);
+   const pageVerifNumberView = new Page({title: `Verification de votre numéro de téléphone`, background:`#fafafa`})
+   .on('disappear',function(){
+     this.dispose();
+   }).appendTo(executeNavigationView);
    
     const introText = new TextView({layoutData:{top:15,right:"10%",left:"10%"},font: font14px,text:`Nous vous avons envoyé un code de verification a numéro suivant ${phoneUser}`,textColor:"#212121",}).appendTo(pageVerifNumberView);
     const labelVerifCode = new TextView({layoutData:layoutDataHelper,text:"VERIFICATION DU CODE",textColor:"#212121",font:"16px roboto, noto"}).appendTo(pageVerifNumberView);
