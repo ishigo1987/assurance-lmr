@@ -250,7 +250,7 @@ module.exports = (devisData)=>{
         }
       }
       // On calcule la prime Ttc
-      ttcPrime = Number(netPrimeValue + accessoriesPrice + tvaValue + pinkCard + centralFile + dta);
+      ttcPrime = Math.round(Number(netPrimeValue + accessoriesPrice + tvaValue + pinkCard + centralFile + dta));
       resolve(ttcPrime);
     }
   });

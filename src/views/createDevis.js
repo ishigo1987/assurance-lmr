@@ -301,7 +301,7 @@ exports.create =()=>{
     console.log(objectOfValueToSend);
     const returnCalculDevis = calculDevis(objectOfValueToSend);
           returnCalculDevis.then((result)=>{
-           let aD = alertDialog("Résultat",`Votre prime Ttc s'élève à ${result} Fcfa`,"","Fermer");
+           let aD = alertDialog("Résultat",`Votre prime TTC s'élève à ${result} Fcfa`,"","Fermer");
           }).catch((e)=>{
            console.log(e);
           }); 
