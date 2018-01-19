@@ -298,7 +298,6 @@ exports.create =()=>{
     //   objectOfValueToSend.dureeJour = dureeValue;
     // }
     objectOfValueToSend.arrayOfCheckBox = arrayOfGuaranties;
-    console.log(objectOfValueToSend);
     const returnCalculDevis = calculDevis(objectOfValueToSend);
           returnCalculDevis.then((result)=>{
            let aD = alertDialog("Résultat",`Votre prime TTC s'élève à ${result} Fcfa`,"","Fermer");

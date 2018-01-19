@@ -31,7 +31,7 @@ exports.create = () =>{
                pDialog("",true,false);
              if(response.Message === 'Mot de passe mis a jour'){
                 messageInfo(pageNewPasswordView,40,"Votre mot de passe a été mis a jour");
-             }else if(response.Message === "Cet utilisateur n'est pas dans la Bd"){
+             }else if(response.Message === "Aucun numero dans la Bd"){
                 messageInfo(pageNewPasswordView,80,"Ce numéro n'existe pas dans notre systeme, veuillez vous inscrire");  
              }
              executeNavigationViewPassword.visible = false;
