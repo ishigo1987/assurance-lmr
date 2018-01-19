@@ -8,7 +8,10 @@ exports.create = () =>{
    let createnavigationViewResetPassword;
    const font14px = "14px roboto, noto";
    const executeNavigationViewPassword = require("../helpers/navigationViewAnimation.js")(createnavigationViewResetPassword, false);
-   const pageNewPasswordView = new Page({title: `Mise a jour du mot de passe`,background:`#fafafa`}).appendTo(executeNavigationViewPassword);
+   const pageNewPasswordView = new Page({title: `Mise a jour du mot de passe`,background:`#fafafa`})
+   .on('disappear',function(){
+     this.dispose();
+   }).appendTo(executeNavigationViewPassword);
    const introText = new TextView({layoutData:{top:15,right:"10%",left:"10%"},font: font14px,text:"Veuillez entrer un nouveau mot de passe que vous utiliserez dorénavant pour acceder a votre compte",textColor:"#212121",}).appendTo(pageNewPasswordView);
    const labelPassword = new TextView({top:["prev()", 25],left:"10%",text:"MOT DE PASSE",textColor:"#212121",font:"16px roboto, noto"}).appendTo(pageNewPasswordView);
    const passwordInput = new TextInput({layoutData:{top:["prev()", 0],left:"10%",right:"10%"},font: font14px,message: "Entrez votre nouveau mot de passe",borderColor:'#e0e0e0'}).appendTo(pageNewPasswordView);  
