@@ -5,7 +5,10 @@ exports.create = () =>{
    const {Page,TextView,TextInput,Button} =  require('tabris');
    const themeColor = '#1562AD';
    const font14px = '14px roboto, noto';
-   let enterPhoneNumberView = new Page({title: 'Mot de passe oublié',background:'#fafafa'});
+   let enterPhoneNumberView = new Page({title: 'Mot de passe oublié',background:'#fafafa'})
+   .on("disappear",function(){
+      this.dispose();
+   });
    const labelPhone = new TextView({top:["prev()", 25],left:"10%",text:"TÉLÉPHONE",textColor:"#212121",font:"16px roboto, noto"}).appendTo(enterPhoneNumberView);
    const phoneInput = new TextInput({top:['prev()', 0],left:'10%',right:'10%',font: font14px,message: 'Entrez votre téléphone',keyboard:'phone',borderColor:'#e0e0e0'}).appendTo(enterPhoneNumberView);  
    const button = new Button({top:['prev()', 20],left:'10%',right:'10%',font: font14px,textColor:'#fff',text:'Continuer',background:themeColor,elevation:0
