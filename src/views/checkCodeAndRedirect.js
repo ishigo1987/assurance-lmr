@@ -37,6 +37,7 @@ exports.create = () =>{
            const temporaryTypeOfView = localStorage.getItem("temporaryDataTypeOfViewToAskRedirection");
            if(temporaryTypeOfView === 'UpdatePassword'){
               // Alors on redirige l'utilisateur vers la vue ou il doit entrer son nouveau password
+              console.log(localStorage.getItem("userInfos"));
               executeNavigationView.dispose();
               let goToEnterNewPassword = require("./enterNewPassword.js");
                   goToEnterNewPassword.create();
