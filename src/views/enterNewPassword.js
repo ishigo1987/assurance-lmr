@@ -23,7 +23,7 @@ exports.create = () =>{
       messageInfo(pageNewPasswordView,40,"Veuillez entrer votre nouveau mot de passe");
     }else{
       let phoneUser = JSON.parse(localStorage.getItem("userInfos"));
-          phoneUser = phoneUser.telephone;
+          phoneUser = phoneUser.phoneNumber;
       let dataToSend = {telephone:phoneUser,password:passwordInputValue, requestName:"UpdatePassword"};
           dataToSend = JSON.stringify(dataToSend);
           console.log(dataToSend);

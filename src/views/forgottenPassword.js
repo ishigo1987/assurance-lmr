@@ -20,7 +20,6 @@ exports.create = () =>{
         }else{
            const dataToSend = {phoneNumber: phoneInputValue};
            localStorage.setItem('userInfos', JSON.stringify(dataToSend));
-           console.log(localStorage.getItem("userInfos"));
            let callModuleSendCode = require('../modules/sendVerificationCode.js')(phoneInputValue);
                callModuleSendCode.then((response)=>{
                 if(response.Message === "Code envoye"){
