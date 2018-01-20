@@ -26,11 +26,9 @@ exports.create = () =>{
           phoneUser = phoneUser.phoneNumber;
       let dataToSend = {telephone:phoneUser,password:passwordInputValue, requestName:"UpdatePassword"};
           dataToSend = JSON.stringify(dataToSend);
-          console.log(dataToSend);
       pDialog("Mise a jour de votre mot de passe.",false,true);
       const updatePassword = require("../modules/ajax.js")(dataToSend, 'https://www.afrikhealth.com/apiAssuranceLmr/apiConnection.php');
             updatePassword.then((response)=>{
-               console.log(response);
                pDialog("",true,false);
              if(response.Message === 'Mot de passe mis a jour'){
                 messageInfo(pageNewPasswordView,40,"Votre mot de passe a été mis a jour");
