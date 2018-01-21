@@ -12,8 +12,6 @@ module.exports = (navigationViewToInsert)=>{
   const font14px ="14px roboto, noto";
   const userInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
   let userNotifications = JSON.parse(localStorage.getItem('notifications'));
-  // Ajax request to retrieve the questions and answers
-  retrieveMessageFromServer();
   const itemsOfActionSheet = [
     {title: "Responsabilité civile chef d'entreprise"},
     {title:"Tous risques informatique"},
@@ -105,5 +103,7 @@ module.exports = (navigationViewToInsert)=>{
            console.log(error);
           })
   }
+  // Ajax request to retrieve the questions and answers
+  retrieveMessageFromServer();
   return speakToAnAgentView;
 };
