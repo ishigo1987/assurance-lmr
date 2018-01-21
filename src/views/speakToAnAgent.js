@@ -97,7 +97,7 @@ module.exports = (navigationViewToInsert)=>{
            if(response.Message === "Pas de resultats trouvés"){
             const infoAboutNewQuestionToSend = new TextView({centerY:0,left:"10%",right:"10%",textColor:"#616161",alignment:"center",text:"Vous n'avez pas encore posé de question a notre agent, si vous en avez une ecrivez la dans la zone située en bas de cette page"}).appendTo(scrollView);
            }else if(response.Message === "Resultats trouvés"){
-             console.log(response.resultats);
+             console.log(response.Resultats);
            }
           }).catch((error)=>{
            console.log(error);

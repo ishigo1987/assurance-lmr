@@ -4,6 +4,7 @@ module.exports = (navigationViewToInsert)=>{
  let dataToSend = {requestName:'Recuperer la réponse de LMR',userNumber:userInformations.Telephone};
      dataToSend = JSON.stringify(dataToSend);
  if(userInformations !== null){
+    // false voulant dire ici que l'utilisateur n'a pas desactivé les notifications push
     setInterval(()=>{
         let notificationAlert = localStorage.getItem('notifications');
         console.log(notificationAlert);
@@ -11,12 +12,10 @@ module.exports = (navigationViewToInsert)=>{
             notificationAlert = JSON.parse(notificationAlert);
             notificationAlert = notificationAlert.NotificationsPush;
         }else{
-            const valuesNotifications = {NotificationsPush:false,NotificationsMessage:false};
-            localStorage.setItem('notifications',JSON.stringify(valuesNotifications));
-            notificationAlert = localStorage.getItem('notifications');
+            notificationAlert = "false";
         }
         console.log(notificationAlert);
-        if(notificationAlert === "true"){
+        if(notificationAlert === "false"){
             const returnResponse = ajaxGetNewResponse(dataToSend,'https://www.afrikhealth.com/apiAssuranceLmr/apiHome.php');
             returnResponse.then((response)=>{
                 console.log(response);
