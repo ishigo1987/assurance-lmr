@@ -12,7 +12,9 @@ exports.create = () =>{
   const connexionView = new Page({title: `Se connecter`,background:`#fafafa`})
   .on({
     appear:()=>{
-      connexionView.visible = true;
+      if(connexionView !== undefined){
+        connexionView.visible = true;
+      }
     },
     disappear:()=>{
       connexionView.visible = false;
