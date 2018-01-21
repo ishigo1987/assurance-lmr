@@ -9,17 +9,8 @@ exports.create = () =>{
   const font14px = "14px roboto, noto";
   let createnavigationView;
   const executeNavigationView = require("../helpers/navigationViewAnimation.js")(createnavigationView,true);
-  const connexionView = new Page({title: `Se connecter`,background:`#fafafa`})
-  .on({
-    appear:()=>{
-      if(connexionView !== undefined){
-        connexionView.visible = true;
-      }
-    },
-    disappear:()=>{
-      connexionView.visible = false;
-    }
-  }).appendTo(executeNavigationView);
+        executeNavigationView.on('disappear',function(){this.dispose();});
+  const connexionView = new Page({title: `Se connecter`,background:`#fafafa`}).appendTo(executeNavigationView);
   
   const scrollView = new ScrollView({left:0,right:0,top:0,background: "#fafafa",bottom:0}).appendTo(connexionView);
   const imageView = new ImageView({layoutData:{centerX: 0,width: 250,height: 150,top:20},image:"src/img/logo.png",scaleMode: "fit", id:"logo"}).appendTo(scrollView);
