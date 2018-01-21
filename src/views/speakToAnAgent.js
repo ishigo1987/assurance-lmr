@@ -1,7 +1,7 @@
 module.exports = (navigationViewToInsert)=>{
   "use strict";
   localStorage.setItem('activePage','speakToAgent');
-  const {Page,ScrollView,TextInput,Composite,TextView} = require('tabris');
+  const {Page,ScrollView,TextInput,Composite,TextView,ActivityIndicator} = require('tabris');
   let createMenuActionIcon,categoryAssuranceSelected;
   const actionSheet = require('../helpers/actionSheet.js');
   let messageInfo = require('../custom_widgets/snackbar.js');
@@ -10,9 +10,10 @@ module.exports = (navigationViewToInsert)=>{
   const sendMessage = require('../helpers/actionIcons.js')(createMenuActionIcon,"","src/icons/sendMessage.png","high",navigationViewToInsert);
   const themeColor = "#1562AD";
   const font14px ="14px roboto, noto";
-  let infoAboutNewQuestionToSend;
   const userInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
   let userNotifications = JSON.parse(localStorage.getItem('notifications'));
+  // Ajax request to retrieve the questions and answers
+  retrieveMessageFromServer();
   const itemsOfActionSheet = [
     {title: "Responsabilité civile chef d'entreprise"},
     {title:"Tous risques informatique"},
@@ -50,12 +51,6 @@ module.exports = (navigationViewToInsert)=>{
   const compositeAreaTypeMessage = new Composite({top:['prev()',0],left:0,right:0,bottom:0,background:"#eee"}).appendTo(speakToAnAgentView);
   const scrollViewComposite = new ScrollView({top:0,left:0,right:0,bottom:0}).appendTo(compositeAreaTypeMessage);
   const inputMessage = new TextInput({left:5,right:5,centerY:0,message:"Entrez votre question",font:font14px,textColor:"#757575",autoCorrect:true,backgroundImage:null,focused:true,type:'multiline'}).appendTo(scrollViewComposite);
-  if(localStorage.getItem('NotAskAQuestionBefore') === null){
-     infoAboutNewQuestionToSend = new TextView({centerY:0,left:"10%",right:"10%",textColor:"#616161",alignment:"center",text:"Vous n'avez pas encore posé de question a notre agent, si vous en avez une ecrivez la dans la zone située en bas de cette page"}).appendTo(scrollView);
-  }else{
-    // Ajax request to retrieve the questions and answers
-    retrieveMessageFromServer();
-  }
   handleActionCategorie.on("select",()=>{
     let as = actionSheet("Choisissez un categorie d'assurance",itemsOfActionSheet);
     as.then((returnAs)=>{
@@ -82,10 +77,6 @@ module.exports = (navigationViewToInsert)=>{
       const ajax = require('../modules/ajax.js')(JSON.stringify(dataToSend),"https://www.afrikhealth.com/apiAssuranceLmr/apiHome.php");
             ajax.then((response)=>{
               if(response.Message === "Question envoyée"){
-                localStorage.setItem('NotAskAQuestionBefore','Une question a déja été posée');
-                if(infoAboutNewQuestionToSend !== undefined){
-                  infoAboutNewQuestionToSend.dispose();
-                }
                 const aD = alertDialog("Question envoyée","Votre question a bien été envoyée, un agent vous répondra dans un delai de 24h maximum.","Ok merci","Fermer");
                 inputMessage.text = "";
                 categoryAssuranceSelected = undefined;
@@ -100,10 +91,16 @@ module.exports = (navigationViewToInsert)=>{
 
   // Fonction qui récupére les questions posées et les réponses recues du serveur
   function retrieveMessageFromServer(){
+    const activityIndicator = new ActivityIndicator({centerX:0,centerY:0,tintColor:themeColor,width:32,height:32}).appendTo(scrollView);
     const dataToSend = {Telephone:String(userInformations.Telephone),requestName:"Récuperer les questions et les réponses"};
     const ajax = require('../modules/ajax.js')(JSON.stringify(dataToSend),"https://www.afrikhealth.com/apiAssuranceLmr/apiHome.php");
           ajax.then((response)=>{
-           console.log(response);
+           activityIndicator.dispose();
+           if(response.Message === "Pas de resultats trouvés"){
+            const infoAboutNewQuestionToSend = new TextView({centerY:0,left:"10%",right:"10%",textColor:"#616161",alignment:"center",text:"Vous n'avez pas encore posé de question a notre agent, si vous en avez une ecrivez la dans la zone située en bas de cette page"}).appendTo(scrollView);
+           }else if(response.Message === "Resultats trouvés"){
+             console.log(response.resultats);
+           }
           }).catch((error)=>{
            console.log(error);
           })

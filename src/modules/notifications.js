@@ -6,17 +6,20 @@ module.exports = (navigationViewToInsert)=>{
  if(userInformations !== null){
     setInterval(()=>{
         let notificationAlert = localStorage.getItem('notifications');
+        console.log(notificationAlert);
         if(notificationAlert !== null){
             notificationAlert = JSON.parse(notificationAlert);
             notificationAlert = notificationAlert.NotificationsPush;
         }else{
-            const valuesNotifications = {NotificationsPush:true,NotificationsMessage:false};
+            const valuesNotifications = {NotificationsPush:false,NotificationsMessage:false};
             localStorage.setItem('notifications',JSON.stringify(valuesNotifications));
             notificationAlert = localStorage.getItem('notifications');
         }
+        console.log(notificationAlert);
         if(notificationAlert === "true"){
             const returnResponse = ajaxGetNewResponse(dataToSend,'https://www.afrikhealth.com/apiAssuranceLmr/apiHome.php');
             returnResponse.then((response)=>{
+                console.log(response);
              // Notification pour avertir l'utilisateur d'une réponse a sa question
              if(response.Statut === "Réponse envoyée"){
               if(localStorage.getItem('activePage') === null){
