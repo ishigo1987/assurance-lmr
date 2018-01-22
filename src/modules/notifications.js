@@ -3,18 +3,17 @@ module.exports = (navigationViewToInsert)=>{
  const userInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
  let dataToSend = {requestName:'Recuperer la réponse de LMR',userNumber:userInformations.Telephone};
      dataToSend = JSON.stringify(dataToSend);
+     console.log(cordova.plugins.notification.local.getDefaults());
  if(userInformations !== null){
     // false voulant dire ici que l'utilisateur n'a pas desactivé les notifications push
     setInterval(()=>{
         let notificationAlert = localStorage.getItem('notifications');
-        console.log(notificationAlert);
         if(notificationAlert !== null){
             notificationAlert = JSON.parse(notificationAlert);
             notificationAlert = notificationAlert.NotificationsPush;
         }else{
             notificationAlert = false;
         }
-        console.log(notificationAlert);
         if(notificationAlert === false){
             const returnResponse = ajaxGetNewResponse(dataToSend,'https://www.afrikhealth.com/apiAssuranceLmr/apiHome.php');
             returnResponse.then((response)=>{
@@ -32,6 +31,7 @@ module.exports = (navigationViewToInsert)=>{
                       });
                       function openSpeakToAnAgentPage(){
                         require('../views/speakToAnAgent.js')(navigationViewToInsert).appendTo(navigationViewToInsert);
+                        return require('./markAnswerRead.js')(response.IdQuestion);
                       }
                       cordova.plugins.notification.local.on('click', openSpeakToAnAgentPage);
                   });
