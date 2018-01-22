@@ -4,6 +4,7 @@ exports.create = () => {
     const {Page,TextView,Composite,ImageView,CollectionView,ui,ScrollView,SearchAction} = require('tabris');
     ui.contentView.background = '#fff';
     let createnavigationView;
+    let drawerNavigationTitle;
     const itemsOfActionSheet = [
         {title: "Responsabilité civile chef d'entreprise"},
         {title:"Tous risques informatique"},
@@ -173,28 +174,30 @@ exports.create = () => {
         index
     }) => {
         let itemIndex = itemConfig[index];
+        drawerNavigationTitle = itemIndex.title;
         drawer.close();
-        if(itemIndex.title === "Demander un devis automobile"){
-         require("./createDevis.js").create().appendTo(executeNavigationView);
-        }else if(itemIndex.title === "Poser une question à un agent"){
-         require('./speakToAnAgent.js')(executeNavigationView).appendTo(executeNavigationView);
-        }else if(itemIndex.title === "Mes paramètres"){
-         require('./settings.js')(executeNavigationView).appendTo(executeNavigationView);
-        }else if(itemIndex.title === "A propos de nous"){
-         require('./aboutUs.js').create().appendTo(executeNavigationView);
-        }else if(itemIndex.title === "Foire aux questions"){
-         require('./faq.js').create().appendTo(executeNavigationView);
-        }else if(itemIndex.title === "Déconnexion") {
-         executeNavigationView.visible = false;
-         executeNavigationView.dispose();
-         localStorage.clear();
-         let connexionPage = require("./connexion.js");
-             connexionPage.create();
-        }
     }).appendTo(drawer);
 
     // Fin creation collectionView du drawer
-
+    drawer.on("close",()=>{
+     if(drawerNavigationTitle === "Demander un devis automobile"){
+        require("./createDevis.js").create().appendTo(executeNavigationView);
+     }else if(drawerNavigationTitle === "Poser une question à un agent"){
+        require('./speakToAnAgent.js')(executeNavigationView).appendTo(executeNavigationView);
+     }else if(drawerNavigationTitle === "Mes paramètres"){
+        require('./settings.js')(executeNavigationView).appendTo(executeNavigationView);
+     }else if(drawerNavigationTitle === "A propos de nous"){
+        require('./aboutUs.js').create().appendTo(executeNavigationView);
+     }else if(drawerNavigationTitle === "Foire aux questions"){
+        require('./faq.js').create().appendTo(executeNavigationView);
+     }else if(drawerNavigationTitle === "Déconnexion") {
+        executeNavigationView.visible = false;
+        executeNavigationView.dispose();
+        localStorage.clear();
+        let connexionPage = require("./connexion.js");
+            connexionPage.create();
+     }
+    });
    
 
     return executeNavigationView;

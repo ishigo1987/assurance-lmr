@@ -12,10 +12,10 @@ module.exports = (navigationViewToInsert)=>{
             notificationAlert = JSON.parse(notificationAlert);
             notificationAlert = notificationAlert.NotificationsPush;
         }else{
-            notificationAlert = "false";
+            notificationAlert = false;
         }
         console.log(notificationAlert);
-        if(notificationAlert === "false"){
+        if(notificationAlert === false){
             const returnResponse = ajaxGetNewResponse(dataToSend,'https://www.afrikhealth.com/apiAssuranceLmr/apiHome.php');
             returnResponse.then((response)=>{
                 console.log(response);
@@ -31,7 +31,7 @@ module.exports = (navigationViewToInsert)=>{
                           smallIcon:'res://android/ldpi.png'
                       });
                       function openSpeakToAnAgentPage(){
-                       console.log('you le brave');
+                        require('../views/speakToAnAgent.js')(navigationViewToInsert).appendTo(navigationViewToInsert);
                       }
                       cordova.plugins.notification.local.on('click', openSpeakToAnAgentPage);
                   });
