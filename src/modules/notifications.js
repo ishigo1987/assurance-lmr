@@ -26,16 +26,16 @@ module.exports = (navigationViewToInsert)=>{
                       cordova.plugins.notification.local.schedule({
                           title: 'Réponse de Msr Assurance',
                           text: response.ReponseLmr,
-                          foreground: true,
+                          foreground:false,
                           vibrate:true,
                           launch:true,
                           smallIcon:'res://android/ldpi.png'
                       });
-                      function markAnswerRead(){
-                        localStorage.setItem("redirectToSpeakToAgent","goToSpeakToAgentByClickOnNotification");
+                      function openSpeakToAnAgentPage(){
+                        require('../views/speakToAnAgent.js')(navigationViewToInsert).appendTo(navigationViewToInsert);
                         // return require('./markAnswerRead.js')(response.IdQuestion);
                       }
-                      cordova.plugins.notification.local.on('click',  markAnswerRead);
+                      cordova.plugins.notification.local.on('click', openSpeakToAnAgentPage);
                   });
                  }
              }
