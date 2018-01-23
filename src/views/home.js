@@ -31,6 +31,7 @@ exports.create = () => {
           executeNavigationView.font = "12px roboto,noto";
     const objectUserInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
     let createMenuActionIcon;
+    require('../modules/notifications.js')(executeNavigationView);
     const actionSheetHome = require('../helpers/actionSheet.js');
     const alertDialog = require('../helpers/alertDialog.js');
     let handleActionCategorie = require("../helpers/actionIcons.js")(createMenuActionIcon, "Voir toutes les catégories d'assurances", "srcImg", "low", executeNavigationView);
@@ -85,7 +86,6 @@ exports.create = () => {
     //   handleActionCategorie.visible = true;
      }
     }).appendTo(executeNavigationView);
-    require('../modules/notifications.js')(executeNavigationView,searchAction);
     let drawer = ui.drawer;
     drawer.enabled = true;
     drawer.background = "#fff";
@@ -183,7 +183,7 @@ exports.create = () => {
      if(drawerNavigationTitle === "Demander un devis automobile"){
         require("./createDevis.js").create().appendTo(executeNavigationView);
      }else if(drawerNavigationTitle === "Poser une question à un agent"){
-        require('./speakToAnAgent.js')(executeNavigationView,searchAction).appendTo(executeNavigationView);
+        require('./speakToAnAgent.js')(executeNavigationView).appendTo(executeNavigationView);
      }else if(drawerNavigationTitle === "Mes paramètres"){
         require('./settings.js')(executeNavigationView).appendTo(executeNavigationView);
      }else if(drawerNavigationTitle === "A propos de nous"){

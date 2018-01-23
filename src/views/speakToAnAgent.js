@@ -1,4 +1,4 @@
-module.exports = (navigationViewToInsert,searchActionHide)=>{
+module.exports = (navigationViewToInsert)=>{
   "use strict";
   localStorage.setItem('activePage','speakToAgent');
   const {Page,ScrollView,TextInput,Composite,TextView,ActivityIndicator} = require('tabris');
@@ -12,7 +12,6 @@ module.exports = (navigationViewToInsert,searchActionHide)=>{
   const font14px ="14px roboto, noto";
   const userInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
   let userNotifications = JSON.parse(localStorage.getItem('notifications'));
-  searchActionHide.visible = false;
   console.log(localStorage.getItem('activePage'));
   const itemsOfActionSheet = [
     {title: "Responsabilité civile chef d'entreprise"},

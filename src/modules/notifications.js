@@ -31,11 +31,10 @@ module.exports = (navigationViewToInsert,searchActionToInsert)=>{
                           launch:true,
                           smallIcon:'res://android/ldpi.png'
                       });
-                      function openSpeakToAnAgentPage(){
-                        require('../views/speakToAnAgent.js')(navigationViewToInsert,searchActionToInsert).appendTo(navigationViewToInsert);
-                        // return require('./markAnswerRead.js')(response.IdQuestion);
+                      function markAnswerRead(){
+                        // require('./markAnswerRead.js')(response.IdQuestion);
                       }
-                      cordova.plugins.notification.local.on('click', openSpeakToAnAgentPage);
+                      cordova.plugins.notification.local.on('click', markAnswerRead);
                   });
                  }
              }
