@@ -1,6 +1,7 @@
 module.exports = (navigationViewToInsert)=>{
   "use strict";
   localStorage.setItem('activePage','speakToAgent');
+  localStorage.removeItem("redirectToSpeakToAgent");
   const {Page,ScrollView,TextInput,Composite,TextView,ActivityIndicator} = require('tabris');
   let createMenuActionIcon,categoryAssuranceSelected;
   const actionSheet = require('../helpers/actionSheet.js');
@@ -43,6 +44,7 @@ module.exports = (navigationViewToInsert)=>{
       handleActionCategorie.visible = false;
       sendMessage.visible = false;
       localStorage.removeItem('activePage');
+      speakToAnAgentView.dispose();
     }
   });
   const scrollView = new ScrollView({top:0,left:0,right:0,bottom:70}).appendTo(speakToAnAgentView);

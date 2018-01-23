@@ -103,6 +103,9 @@ exports.create = () => {
          drawer.enabled = false;
         }
     }).appendTo(executeNavigationView);
+    if(localStorage.getItem("redirectToSpeakToAgent") !== null){
+      require('./speakToAnAgent.js')(executeNavigationView).appendTo(executeNavigationView);
+    }
     const scrollView = new ScrollView({ left: 0,right: 0,top: 40,bottom:0}).appendTo(homeView);
     const typeOfAssuranceComposite = new Composite({top:0,left:0,right:0,height:40,background:"#2c71b5"}).appendTo(homeView);
     const textTypeOfAssurance = new TextView({centerX:0,centerY:0,maxLines:1,textColor:"#0e4479",text:"TOUTES LES ASSURANCES",font:"bold 16px roboto, noto"}).appendTo(typeOfAssuranceComposite);

@@ -28,14 +28,14 @@ module.exports = (navigationViewToInsert)=>{
                           text: response.ReponseLmr,
                           foreground: true,
                           vibrate:true,
-                          launch:false,
+                          launch:true,
                           smallIcon:'res://android/ldpi.png'
                       });
-                      function openSpeakToAnAgentPage(){
-                        require('../views/speakToAnAgent.js')(navigationViewToInsert).appendTo(navigationViewToInsert);
+                      function markAnswerRead(){
+                        localStorage.setItem("redirectToSpeakToAgent","goToSpeakToAgentByClickOnNotification")
                         return require('./markAnswerRead.js')(response.IdQuestion);
                       }
-                      cordova.plugins.notification.local.on('click', openSpeakToAnAgentPage);
+                      cordova.plugins.notification.local.on('click',  markAnswerRead);
                   });
                  }
              }
