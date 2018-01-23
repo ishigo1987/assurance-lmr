@@ -101,15 +101,15 @@ module.exports = (navigationViewToInsert,searchActionHide)=>{
            if(response.Message === "Pas de resultats trouvés"){
             const infoAboutNewQuestionToSend = new TextView({centerY:0,left:"10%",right:"10%",textColor:"#616161",alignment:"center",text:"Vous n'avez pas encore posé de question a notre agent, si vous en avez une ecrivez la dans la zone située en bas de cette page"}).appendTo(scrollView);
            }else if(response.Message === "Resultats trouvés"){
-            let j = xhrResponse.Resultats.Questions_user.length;
+            let j = response.Resultats.Questions_user.length;
             for(let i=0; i<j; i++){
-                 let responseLmr = xhrResponse.Resultats.Answers_user[i];
+                 let responseLmr = response.Resultats.Answers_user[i];
                  if(responseLmr === ""){
                    responseLmr = "En attente d'une réponse de M.Assurances";
                  }
                 const questionsContainer = new tabris.Composite({top:['prev()',10],left:10,right:'25%',cornerRadius:'20',background:'#1562AD'}).appendTo(scrollView);
                 const answersContainer = new tabris.Composite({top:['prev()',10],right:10,left:'25%',cornerRadius:'20',background:'#e0e0e0'}).appendTo(scrollView);
-                const questions = new tabris.TextView({top:10,left:10,right:10,bottom:10,textColor:'#ffffff',text:xhrResponse.Resultats.Questions_user[i]}).appendTo(questionsContainer);
+                const questions = new tabris.TextView({top:10,left:10,right:10,bottom:10,textColor:'#ffffff',text:response.Resultats.Questions_user[i]}).appendTo(questionsContainer);
                 const answer = new tabris.TextView({top:10,left:10,right:10,bottom:10,textColor:'#757575',text:responseLmr}).appendTo(answersContainer);
               }
            }
