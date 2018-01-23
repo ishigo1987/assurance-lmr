@@ -36,8 +36,6 @@ module.exports = (navigationViewToInsert)=>{
   const speakToAnAgentView = new Page({title: `Parler à un agent`,background:`#fafafa`})
   .on({
     appear: ()=>{
-      const hideSearchAction = navigationViewToInsert.find('#searchAction');
-            hideSearchAction.visible = false;
       handleActionCategorie.visible = true;
       sendMessage.visible = true;
     },
@@ -48,6 +46,8 @@ module.exports = (navigationViewToInsert)=>{
       speakToAnAgentView.dispose();
     }
   });
+  const hideSearchAction = navigationViewToInsert.find('#searchAction');
+        hideSearchAction.visible = false;
   const scrollView = new ScrollView({top:0,left:0,right:0,bottom:70}).appendTo(speakToAnAgentView);
   const compositeAreaTypeMessage = new Composite({top:['prev()',0],left:0,right:0,bottom:0,background:"#eee"}).appendTo(speakToAnAgentView);
   const scrollViewComposite = new ScrollView({top:0,left:0,right:0,bottom:0}).appendTo(compositeAreaTypeMessage);
