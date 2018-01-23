@@ -1,3 +1,5 @@
+import { SearchAction } from 'tabris';
+
 module.exports = (navigationViewToInsert)=>{
  const ajaxGetNewResponse = require('./ajax.js');
  const userInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
@@ -18,7 +20,7 @@ module.exports = (navigationViewToInsert)=>{
         if(notificationAlert === false){
             const returnResponse = ajaxGetNewResponse(dataToSend,'https://www.afrikhealth.com/apiAssuranceLmr/apiHome.php');
             returnResponse.then((response)=>{
-                console.log(response);
+                console.log(localStorage.getItem('activePage'));
              // Notification pour avertir l'utilisateur d'une réponse a sa question
              if(response.Statut === "Réponse envoyée"){
               if(localStorage.getItem('activePage') === null){
@@ -32,7 +34,7 @@ module.exports = (navigationViewToInsert)=>{
                           smallIcon:'res://android/ldpi.png'
                       });
                       function openSpeakToAnAgentPage(){
-                        require('../views/speakToAnAgent.js')(navigationViewToInsert).appendTo(navigationViewToInsert);
+                        require('../views/speakToAnAgent.js')(navigationViewToInsert,SearchAction).appendTo(navigationViewToInsert);
                         // return require('./markAnswerRead.js')(response.IdQuestion);
                       }
                       cordova.plugins.notification.local.on('click', openSpeakToAnAgentPage);

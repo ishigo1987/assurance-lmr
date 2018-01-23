@@ -183,7 +183,7 @@ exports.create = () => {
      if(drawerNavigationTitle === "Demander un devis automobile"){
         require("./createDevis.js").create().appendTo(executeNavigationView);
      }else if(drawerNavigationTitle === "Poser une question à un agent"){
-        require('./speakToAnAgent.js')(executeNavigationView).appendTo(executeNavigationView);
+        require('./speakToAnAgent.js')(executeNavigationView,searchAction).appendTo(executeNavigationView);
      }else if(drawerNavigationTitle === "Mes paramètres"){
         require('./settings.js')(executeNavigationView).appendTo(executeNavigationView);
      }else if(drawerNavigationTitle === "A propos de nous"){

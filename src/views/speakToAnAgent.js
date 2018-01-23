@@ -1,4 +1,4 @@
-module.exports = (navigationViewToInsert)=>{
+module.exports = (navigationViewToInsert,searchActionHide)=>{
   "use strict";
   localStorage.setItem('activePage','speakToAgent');
   const {Page,ScrollView,TextInput,Composite,TextView,ActivityIndicator} = require('tabris');
@@ -12,6 +12,8 @@ module.exports = (navigationViewToInsert)=>{
   const font14px ="14px roboto, noto";
   const userInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
   let userNotifications = JSON.parse(localStorage.getItem('notifications'));
+  searchActionHide.visible = false;
+  console.log(localStorage.getItem('activePage'));
   const itemsOfActionSheet = [
     {title: "Responsabilité civile chef d'entreprise"},
     {title:"Tous risques informatique"},
@@ -46,8 +48,7 @@ module.exports = (navigationViewToInsert)=>{
       speakToAnAgentView.dispose();
     }
   });
-  const hideSearchAction = navigationViewToInsert.find('#searchAction');
-        hideSearchAction.visible = false;
+  
   const scrollView = new ScrollView({top:0,left:0,right:0,bottom:70}).appendTo(speakToAnAgentView);
   const compositeAreaTypeMessage = new Composite({top:['prev()',0],left:0,right:0,bottom:0,background:"#eee"}).appendTo(speakToAnAgentView);
   const scrollViewComposite = new ScrollView({top:0,left:0,right:0,bottom:0}).appendTo(compositeAreaTypeMessage);
@@ -100,7 +101,17 @@ module.exports = (navigationViewToInsert)=>{
            if(response.Message === "Pas de resultats trouvés"){
             const infoAboutNewQuestionToSend = new TextView({centerY:0,left:"10%",right:"10%",textColor:"#616161",alignment:"center",text:"Vous n'avez pas encore posé de question a notre agent, si vous en avez une ecrivez la dans la zone située en bas de cette page"}).appendTo(scrollView);
            }else if(response.Message === "Resultats trouvés"){
-             console.log(response.Resultats);
+            let j = xhrResponse.Resultats.Questions_user.length;
+            for(let i=0; i<j; i++){
+                 let responseLmr = xhrResponse.Resultats.Answers_user[i];
+                 if(responseLmr === ""){
+                   responseLmr = "En attente d'une réponse de M.Assurances";
+                 }
+                const questionsContainer = new tabris.Composite({top:['prev()',10],left:10,right:'25%',cornerRadius:'20',background:'#1562AD'}).appendTo(scrollView);
+                const answersContainer = new tabris.Composite({top:['prev()',10],right:10,left:'25%',cornerRadius:'20',background:'#e0e0e0'}).appendTo(scrollView);
+                const questions = new tabris.TextView({top:10,left:10,right:10,bottom:10,textColor:'#ffffff',text:xhrResponse.Resultats.Questions_user[i]}).appendTo(questionsContainer);
+                const answer = new tabris.TextView({top:10,left:10,right:10,bottom:10,textColor:'#757575',text:responseLmr}).appendTo(answersContainer);
+              }
            }
           }).catch((error)=>{
            console.log(error);
