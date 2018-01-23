@@ -3,6 +3,7 @@ module.exports = (navigationViewToInsert)=>{
  const userInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
  let dataToSend = {requestName:'Recuperer la réponse de LMR',userNumber:userInformations.Telephone};
      dataToSend = JSON.stringify(dataToSend);
+     console.log(localStorage.getItem('activePage'));
      console.log(cordova.plugins.notification.local.getDefaults());
  if(userInformations !== null){
     // false voulant dire ici que l'utilisateur n'a pas desactivé les notifications push
