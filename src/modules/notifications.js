@@ -26,7 +26,7 @@ module.exports = (navigationViewToInsert)=>{
                       cordova.plugins.notification.local.schedule({
                           title: 'Réponse de Msr Assurance',
                           text: response.ReponseLmr,
-                          foreground:false,
+                          foreground:true,
                           vibrate:true,
                           launch:true,
                           smallIcon:'res://android/ldpi.png'

@@ -36,6 +36,8 @@ module.exports = (navigationViewToInsert)=>{
   const speakToAnAgentView = new Page({title: `Parler à un agent`,background:`#fafafa`})
   .on({
     appear: ()=>{
+      const hideSearchAction = navigationViewToInsert.find('#searchAction');
+            hideSearchAction.visible = false;
       handleActionCategorie.visible = true;
       sendMessage.visible = true;
     },
