@@ -1,6 +1,4 @@
-import { SearchAction } from 'tabris';
-
-module.exports = (navigationViewToInsert)=>{
+module.exports = (navigationViewToInsert,searchActionToInsert)=>{
  const ajaxGetNewResponse = require('./ajax.js');
  const userInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
  let dataToSend = {requestName:'Recuperer la réponse de LMR',userNumber:userInformations.Telephone};
@@ -34,7 +32,7 @@ module.exports = (navigationViewToInsert)=>{
                           smallIcon:'res://android/ldpi.png'
                       });
                       function openSpeakToAnAgentPage(){
-                        require('../views/speakToAnAgent.js')(navigationViewToInsert,SearchAction).appendTo(navigationViewToInsert);
+                        require('../views/speakToAnAgent.js')(navigationViewToInsert,searchActionToInsert).appendTo(navigationViewToInsert);
                         // return require('./markAnswerRead.js')(response.IdQuestion);
                       }
                       cordova.plugins.notification.local.on('click', openSpeakToAnAgentPage);
