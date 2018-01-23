@@ -32,8 +32,8 @@ module.exports = (navigationViewToInsert)=>{
                           smallIcon:'res://android/ldpi.png'
                       });
                       function markAnswerRead(){
-                        localStorage.setItem("redirectToSpeakToAgent","goToSpeakToAgentByClickOnNotification")
-                        return require('./markAnswerRead.js')(response.IdQuestion);
+                        localStorage.setItem("redirectToSpeakToAgent","goToSpeakToAgentByClickOnNotification");
+                        // return require('./markAnswerRead.js')(response.IdQuestion);
                       }
                       cordova.plugins.notification.local.on('click',  markAnswerRead);
                   });
