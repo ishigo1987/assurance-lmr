@@ -1,11 +1,12 @@
 module.exports = (navigationViewToInsert,searchActionToInsert)=>{
  const ajaxGetNewResponse = require('./ajax.js');
+ let userInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
  let dataToSend = {requestName:'Recuperer la réponse de LMR',userNumber:userInformations.Telephone};
      dataToSend = JSON.stringify(dataToSend);
     // false voulant dire ici que l'utilisateur n'a pas desactivé les notifications push
     setInterval(()=>{
-     let userInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
-     if(userInformations !== null){
+     let copyUserInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
+     if(copyUserInformations !== null){
         let notificationAlert = localStorage.getItem('notifications');
         if(notificationAlert !== null){
             notificationAlert = JSON.parse(notificationAlert);
