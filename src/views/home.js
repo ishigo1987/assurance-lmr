@@ -4,7 +4,7 @@ exports.create = () => {
     const {Page,TextView,Composite,ImageView,CollectionView,ui,ScrollView,SearchAction} = require('tabris');
     ui.contentView.background = '#fff';
     let createnavigationView;
-    let drawerNavigationTitle;
+    let drawerNavigationTitle = "";
     const itemsOfActionSheet = [
         {title: "Responsabilité civile chef d'entreprise"},
         {title:"Tous risques informatique"},
@@ -134,10 +134,11 @@ exports.create = () => {
             title: "Foire aux questions",
             image: "src/icons/faq.png"
         },
-        {
-            title: "Déconnexion",
-            image: "src/icons/logout.png"
-     }];
+        // {
+        //     title: "Déconnexion",
+        //     image: "src/icons/logout.png"
+        // }
+    ];
     const drawerCollectionView = new CollectionView({
         right: 0,
         bottom: 0,
@@ -190,13 +191,15 @@ exports.create = () => {
         require('./aboutUs.js').create().appendTo(executeNavigationView);
      }else if(drawerNavigationTitle === "Foire aux questions"){
         require('./faq.js').create().appendTo(executeNavigationView);
-     }else if(drawerNavigationTitle === "Déconnexion") {
-        executeNavigationView.visible = false;
-        executeNavigationView.dispose();
-        localStorage.clear();
-        let connexionPage = require("./connexion.js");
-            connexionPage.create();
      }
+    //  else if(drawerNavigationTitle === "Déconnexion") {
+    //     executeNavigationView.visible = false;
+    //     executeNavigationView.dispose();
+    //     localStorage.clear();
+    //     let connexionPage = require("./connexion.js");
+    //         connexionPage.create();
+    //  }
+    drawerNavigationTitle = "";
     });
    
 

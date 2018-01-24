@@ -1,13 +1,11 @@
 module.exports = (navigationViewToInsert,searchActionToInsert)=>{
  const ajaxGetNewResponse = require('./ajax.js');
- const userInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
  let dataToSend = {requestName:'Recuperer la réponse de LMR',userNumber:userInformations.Telephone};
      dataToSend = JSON.stringify(dataToSend);
-     console.log(localStorage.getItem('activePage'));
-     console.log(cordova.plugins.notification.local.getDefaults());
- if(userInformations !== null){
     // false voulant dire ici que l'utilisateur n'a pas desactivé les notifications push
     setInterval(()=>{
+     let userInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
+     if(userInformations !== null){
         let notificationAlert = localStorage.getItem('notifications');
         if(notificationAlert !== null){
             notificationAlert = JSON.parse(notificationAlert);
@@ -44,7 +42,9 @@ module.exports = (navigationViewToInsert,searchActionToInsert)=>{
         }else{
             return false;
         }
-        
+      }else{
+          return false;
+      } 
      },60000);
- }
+ 
 }
