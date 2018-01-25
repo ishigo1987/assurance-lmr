@@ -14,10 +14,9 @@ module.exports = (navigationViewToInsert)=>{
   let userNotifications = JSON.parse(localStorage.getItem('notifications'));
   const itemsOfActionSheet = [
     {title: "Responsabilité civile chef d'entreprise"},
-    {title:"Tous risques informatique"},
+    {title: "Tous risques informatique"},
     {title: "Maladie"},
-    {title: "Multirisque habitations et/ou bureaux"},
-    {title: "Habitation"},
+    {title: "Multirisque habitations et bureaux"},
     {title: "Incendie et perte d'exploitation"},
     {title: "Individuelle accident"},
     {title: "Tous risques chantier"},
@@ -25,13 +24,10 @@ module.exports = (navigationViewToInsert)=>{
     {title: "Bris de machine"},
     {title: "Vol en coffre-fort"},
     {title: "Transport des fonds"},
-    {title: "Voyage ou maladie internationale"},
+    {title: "Complémentaire retraite"},
     {title: "Automobile"},
-    {title: "Prevoyance retraite"},
-    {title: "Contrat indemnités de fin de carriere(IFC)"},
-    {title: "Visa études plus"},
-    {title: "Assistance frais funérailles"},
-    {title: "Bancassurance"}
+    {title: "Visa Schengen : Europax"},
+    {title: "Frais funéraires"}
   ];
   const speakToAnAgentView = new Page({title: `Parler à un agent`,background:`#fafafa`})
   .on({
@@ -95,7 +91,6 @@ module.exports = (navigationViewToInsert)=>{
     const dataToSend = {Telephone:String(userInformations.Telephone),requestName:"Récuperer les questions et les réponses"};
     const ajax = require('../modules/ajax.js')(JSON.stringify(dataToSend),"https://www.afrikhealth.com/apiAssuranceLmr/apiHome.php");
           ajax.then((response)=>{
-           console.log(response);
            activityIndicator.dispose();
            if(response.Message === "Pas de resultats trouvés"){
             const infoAboutNewQuestionToSend = new TextView({centerY:0,left:"10%",right:"10%",textColor:"#616161",alignment:"center",text:"Vous n'avez pas encore posé de question a notre agent, si vous en avez une ecrivez la dans la zone située en bas de cette page"}).appendTo(scrollView);
@@ -111,7 +106,6 @@ module.exports = (navigationViewToInsert)=>{
                 const questions = new tabris.TextView({top:10,left:10,right:10,bottom:10,textColor:'#ffffff',text:response.Resultats.Questions_user[i]}).appendTo(questionsContainer);
                 const answer = new tabris.TextView({top:10,left:10,right:10,bottom:10,textColor:'#757575',text:responseLmr}).appendTo(answersContainer);
               }
-            console.log(response.Resultats.Status_question);
             const arrayOfStatusQuestion = response.Resultats.Status_question;
             if(arrayOfStatusQuestion.includes("Repondu") === true){
               function getIndex(element){return element === "Repondu";}

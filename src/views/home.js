@@ -9,7 +9,7 @@ exports.create = () => {
         {title: "Responsabilité civile chef d'entreprise"},
         {title: "Tous risques informatique"},
         {title: "Maladie"},
-        {title: "Multirisque habitations et/ou bureaux"},
+        {title: "Multirisque habitations et bureaux"},
         {title: "Incendie et perte d'exploitation"},
         {title: "Individuelle accident"},
         {title: "Tous risques chantier"},
