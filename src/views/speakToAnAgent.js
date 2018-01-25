@@ -96,6 +96,7 @@ module.exports = (navigationViewToInsert)=>{
     const dataToSend = {Telephone:String(userInformations.Telephone),requestName:"Récuperer les questions et les réponses"};
     const ajax = require('../modules/ajax.js')(JSON.stringify(dataToSend),"https://www.afrikhealth.com/apiAssuranceLmr/apiHome.php");
           ajax.then((response)=>{
+           console.log(response);
            activityIndicator.dispose();
            if(response.Message === "Pas de resultats trouvés"){
             const infoAboutNewQuestionToSend = new TextView({centerY:0,left:"10%",right:"10%",textColor:"#616161",alignment:"center",text:"Vous n'avez pas encore posé de question a notre agent, si vous en avez une ecrivez la dans la zone située en bas de cette page"}).appendTo(scrollView);

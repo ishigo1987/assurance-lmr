@@ -31,7 +31,7 @@ module.exports = (navigationViewToInsert,searchActionToInsert)=>{
                           smallIcon:'res://android/ldpi.png'
                       });
                       function markAnswerRead(){
-                        // require('./markAnswerRead.js')(response.IdQuestion);
+                        require('./markAnswerRead.js')(response.IdQuestion);
                       }
                       cordova.plugins.notification.local.on('click', markAnswerRead);
                   });
