@@ -12,7 +12,6 @@ module.exports = (navigationViewToInsert)=>{
   const font14px ="14px roboto, noto";
   const userInformations = JSON.parse(localStorage.getItem("storeUserInfos"));
   let userNotifications = JSON.parse(localStorage.getItem('notifications'));
-  console.log(localStorage.getItem('activePage'));
   const itemsOfActionSheet = [
     {title: "Responsabilité civile chef d'entreprise"},
     {title:"Tous risques informatique"},
@@ -112,6 +111,14 @@ module.exports = (navigationViewToInsert)=>{
                 const questions = new tabris.TextView({top:10,left:10,right:10,bottom:10,textColor:'#ffffff',text:response.Resultats.Questions_user[i]}).appendTo(questionsContainer);
                 const answer = new tabris.TextView({top:10,left:10,right:10,bottom:10,textColor:'#757575',text:responseLmr}).appendTo(answersContainer);
               }
+            console.log(response.Resultats.Status_question);
+            const arrayOfStatusQuestion = response.Resultats.Status_question;
+            if(arrayOfStatusQuestion.includes("Repondu") === true){
+              function getIndex(element){return element === "Repondu";}
+              const indexStatusAnswerRepondu = Number(arrayOfStatusQuestion.findIndex(getIndex));
+              const IdQuestionAnswerRepondu = response.Resultats.Id_questions[indexStatusAnswerRepondu];
+              require('../modules/markAnswerRead.js')(IdQuestionAnswerRepondu);
+            }
            }
           }).catch((error)=>{
            console.log(error);

@@ -7,10 +7,9 @@ exports.create = () => {
     let drawerNavigationTitle = "";
     const itemsOfActionSheet = [
         {title: "Responsabilité civile chef d'entreprise"},
-        {title:"Tous risques informatique"},
+        {title: "Tous risques informatique"},
         {title: "Maladie"},
         {title: "Multirisque habitations et/ou bureaux"},
-        {title: "Habitation"},
         {title: "Incendie et perte d'exploitation"},
         {title: "Individuelle accident"},
         {title: "Tous risques chantier"},
@@ -18,13 +17,10 @@ exports.create = () => {
         {title: "Bris de machine"},
         {title: "Vol en coffre-fort"},
         {title: "Transport des fonds"},
-        {title: "Voyage ou maladie internationale"},
+        {title: "Complémentaire retraite"},
         {title: "Automobile"},
-        {title: "Prevoyance retraite"},
-        {title: "Contrat indemnités de fin de carriere(IFC)"},
-        {title: "Visa études plus"},
-        {title: "Assistance frais funérailles"},
-        {title: "Bancassurance"}
+        {title: "Visa Schengen : Europax"},
+        {title: "Frais funéraires"}
       ];
     const executeNavigationView = require("../helpers/navigationViewAnimation.js")(createnavigationView, false);
           executeNavigationView.drawerActionVisible = true;

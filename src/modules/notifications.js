@@ -17,7 +17,6 @@ module.exports = (navigationViewToInsert,searchActionToInsert)=>{
         if(notificationAlert === false){
             const returnResponse = ajaxGetNewResponse(dataToSend,'https://www.afrikhealth.com/apiAssuranceLmr/apiHome.php');
             returnResponse.then((response)=>{
-                console.log(localStorage.getItem('activePage'));
              // Notification pour avertir l'utilisateur d'une réponse a sa question
              if(response.Statut === "Réponse envoyée"){
               if(localStorage.getItem('activePage') === null){
@@ -36,6 +35,8 @@ module.exports = (navigationViewToInsert,searchActionToInsert)=>{
                       cordova.plugins.notification.local.on('click', markAnswerRead);
                   });
                  }
+             }else if(response.Statut === "Pas de réponse"){
+                 return false;
              }
            }).catch((error)=>{
              console.log(error);
