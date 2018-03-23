@@ -1,7 +1,10 @@
 exports.create = () => {
     "use strict";
     const themeColor = "#1562AD";
-    const {Page,TextView,Composite,ImageView,CollectionView,ui,ScrollView,SearchAction} = require('tabris');
+    const {Page,TextView,Composite,ImageView,CollectionView,ui,ScrollView,SearchAction,device} = require('tabris');
+    const whatDevice = device.platform;
+    let placementPriority = "normal";
+    if(whatDevice === "Android"){placementPriority = "low";}
     ui.contentView.background = '#fff';
     let createnavigationView;
     let drawerNavigationTitle = "";
@@ -30,7 +33,7 @@ exports.create = () => {
     require('../modules/notifications.js')(executeNavigationView);
     const actionSheetHome = require('../helpers/actionSheet.js');
     const alertDialog = require('../helpers/alertDialog.js');
-    let handleActionCategorie = require("../helpers/actionIcons.js")(createMenuActionIcon, "Voir toutes les catégories d'assurances", "srcImg", "low", executeNavigationView);
+    let handleActionCategorie = require("../helpers/actionIcons.js")(createMenuActionIcon, "Voir toutes les catégories d'assurances", "src/icons/add.png",  placementPriority, executeNavigationView);
         handleActionCategorie.on("select",()=>{
             let as = actionSheetHome("Choisissez un categorie d'assurance",itemsOfActionSheet);
                 as.then((returnAs)=>{
@@ -177,6 +180,7 @@ exports.create = () => {
 
     // Fin creation collectionView du drawer
     drawer.on("close",()=>{
+        console.log(drawerNavigationTitle);
      if(drawerNavigationTitle === "Demander un devis automobile"){
         require("./createDevis.js").create().appendTo(executeNavigationView);
      }else if(drawerNavigationTitle === "Poser une question à un agent"){

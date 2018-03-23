@@ -2,7 +2,7 @@ module.exports = (actionCallVariable, titleSubMenu, image, placementPriority, na
  actionCallVariable = new tabris.Action({
    title:titleSubMenu,
    placementPriority: placementPriority,
-   image: {src: image,scaleMode:"auto"}
+   image: {src: image,scale:1.1}
  }).appendTo(navigationViewInsertion);
    return actionCallVariable;
 };

@@ -22,7 +22,7 @@ module.exports = (navigationViewToInsert,searchActionToInsert)=>{
               if(localStorage.getItem('activePage') === null){
                   cordova.plugins.notification.local.hasPermission((granted)=>{
                       cordova.plugins.notification.local.schedule({
-                          title: 'Réponse de Msr Assurance',
+                          title: 'Réponse de M.Assurance',
                           text: response.ReponseLmr,
                           foreground:true,
                           vibrate:true,

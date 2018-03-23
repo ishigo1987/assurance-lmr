@@ -1,12 +1,15 @@
 module.exports = (navigationViewToInsert)=>{
   "use strict";
   localStorage.setItem('activePage','speakToAgent');
-  const {Page,ScrollView,TextInput,Composite,TextView,ActivityIndicator} = require('tabris');
+  const {Page,ScrollView,TextInput,Composite,TextView,ActivityIndicator,device} = require('tabris');
+  const whatDevice = device.platform;
+  let placementPriority = "normal";
+  if(whatDevice === "Android"){placementPriority = "low";}
   let createMenuActionIcon,categoryAssuranceSelected;
   const actionSheet = require('../helpers/actionSheet.js');
   let messageInfo = require('../custom_widgets/snackbar.js');
   const alertDialog = require('../helpers/alertDialog.js');
-  const handleActionCategorie = require("../helpers/actionIcons.js")(createMenuActionIcon, "Selectionnez une catégorie d'assurances", "srcImg", "low", navigationViewToInsert);
+  const handleActionCategorie = require("../helpers/actionIcons.js")(createMenuActionIcon, "Selectionnez une catégorie d'assurances", "src/icons/add.png", placementPriority, navigationViewToInsert);
   const sendMessage = require('../helpers/actionIcons.js')(createMenuActionIcon,"","src/icons/sendMessage.png","high",navigationViewToInsert);
   const themeColor = "#1562AD";
   const font14px ="14px roboto, noto";

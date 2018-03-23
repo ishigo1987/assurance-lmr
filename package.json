@@ -8,6 +8,7 @@
     "start": "tabris serve"
   },
   "dependencies": {
+    "npm": "^5.7.1",
     "tabris": "^2.3.0"
   },
   "devDependencies": {
