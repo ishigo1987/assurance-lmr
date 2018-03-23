@@ -173,14 +173,17 @@ exports.create = () => {
     }).on("select", ({
         index
     }) => {
+        drawer.close();
         let itemIndex = itemConfig[index];
         drawerNavigationTitle = itemIndex.title;
-        drawer.close();
+        
     }).appendTo(drawer);
 
     // Fin creation collectionView du drawer
+    // Je lance d'abord l'ouverture du drawer pour regler un bug sur ios
+    // Qui ne declenche pas l'evenement de fermeture(close) si celui d'ouverture n'a pas été lancé d'abord
+    drawer.on('open',()=>{});
     drawer.on("close",()=>{
-        console.log(drawerNavigationTitle);
      if(drawerNavigationTitle === "Demander un devis automobile"){
         require("./createDevis.js").create().appendTo(executeNavigationView);
      }else if(drawerNavigationTitle === "Poser une question à un agent"){
