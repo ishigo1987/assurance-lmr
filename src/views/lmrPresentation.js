@@ -9,7 +9,7 @@ exports.create = ()=>{
         executeNavigationView.toolbarVisible = false;
   const lmrPresentationView = new Page({background:themeColor}).appendTo(executeNavigationView);
   const scrollView = new ScrollView({left: 0,right: 0,top: 0,bottom:0}).appendTo(lmrPresentationView);
-  let tabFolder = new TabFolder({left: 0, top: 0, right: 0, bottom:50,paging: true,elevation:2,tabBarLocation:'hidden',id:'tabFolder'})
+  let tabFolder = new TabFolder({background:themeColor,left: 0, top: 0, right: 0, bottom:50,paging: true,elevation:2,tabBarLocation:'hidden',id:'tabFolder'})
   .on("selectionChanged", ({value:tab})=>{
     let tabActive = tab.title;
     if(tabActive === "tab3"){
