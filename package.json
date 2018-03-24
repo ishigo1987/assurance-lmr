@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "npm": "^5.7.1",
-    "tabris": "^2.4.0"
+    "tabris": "^2.4.1"
   },
   "devDependencies": {
     "eslint": "^4.7.2"
